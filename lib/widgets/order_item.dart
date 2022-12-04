@@ -14,7 +14,7 @@ class OrderItem extends StatelessWidget {
       required this.index,
       required this.context,
       required this.exampleList,
-      required this.isSends});
+      required this.isSend});
 
   @override
   Widget build(BuildContext context) {
