@@ -7,12 +7,14 @@ class OrderItem extends StatelessWidget {
   BuildContext context;
   int index;
   List<String> exampleList;
+  bool isSend;
 
   OrderItem(
       {super.key,
       required this.index,
       required this.context,
-      required this.exampleList});
+      required this.exampleList,
+      required this.isSends});
 
   @override
   Widget build(BuildContext context) {
