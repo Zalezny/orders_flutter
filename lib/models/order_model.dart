@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 class OrderList {
-  final List<Orders> orders;
+  final List<Orders>? orders;
 
   OrderList({required this.orders});
   factory OrderList.fromJson(List<dynamic> json) {

@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:testapp/pages/order_page.dart';
+import 'package:testapp/utils/const_database.dart';
+
+import 'models/order_model.dart';
+
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -37,6 +44,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late Future<OrderList> _futureOrder;
+
+  @override
+  void initState() {
+    super.initState();
+    _futureOrder = fetchOrders();
+  }
+
+  static Future<OrderList> fetchOrders() async {
+    const Map<String, String> headers = {'authorization': keyAuth};
+    final response = await http.get(
+      Uri.parse(orderUrl),
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body);
+      return OrderList.fromJson(body);
+    } else {
+      throw Exception('Failed to load orders');
+    }
+  }
+
   @override
   Widget build(BuildContext context) => DefaultTabController(
         length: 2,
@@ -52,11 +82,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ]),
             ),
-            body: const TabBarView(
-              children: [
-                OrderPage(isSend: false),
-                OrderPage(isSend: true),
-              ],
+            body: FutureBuilder(
+              future: _futureOrder,
+              builder: (ctx, snapshot) {
+                if (snapshot.hasData) {
+                  var _ordersList = snapshot.data!.orders;
+                  return TabBarView(
+                    children: [
+                      OrderPage(ordersList: _ordersList!, isSend: false),
+                      OrderPage(ordersList: _ordersList, isSend: true),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  throw Exception(snapshot.error);
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             )),
       );
 }
