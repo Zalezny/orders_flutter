@@ -54,8 +54,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             body: const TabBarView(
               children: [
-                OrderList(false),
-                OrderList(true),
+                OrderPage(isSend: false),
+                OrderPage(isSend: true),
               ],
             )),
       );
