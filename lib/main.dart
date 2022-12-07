@@ -28,8 +28,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'KatyaOrders',
       theme: ThemeData(
-        colorScheme: schemeOfcolors,
-      ),
+          colorScheme: schemeOfcolors,
+          fontFamily: 'Roboto',
+          textTheme: ThemeData.light().textTheme.copyWith(
+                titleLarge: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+                titleMedium: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14),
+                titleSmall: const TextStyle(
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
+              )),
       home: const MyHomePage(title: 'Zamówienia'),
     );
   }
@@ -73,12 +88,18 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
             appBar: AppBar(
               title: Text(widget.title),
-              bottom: const TabBar(tabs: [
+              bottom: TabBar(tabs: [
                 Tab(
-                  text: 'Do wysyłki',
+                  child: Text(
+                    'Do wysyłki',
+                    style: Theme.of(context).primaryTextTheme.titleLarge,
+                  ),
                 ),
                 Tab(
-                  text: 'Wysłane',
+                  child: Text(
+                    'Wysłane',
+                    style: Theme.of(context).primaryTextTheme.titleLarge,
+                  ),
                 ),
               ]),
             ),
@@ -86,11 +107,11 @@ class _MyHomePageState extends State<MyHomePage> {
               future: _futureOrder,
               builder: (ctx, snapshot) {
                 if (snapshot.hasData) {
-                  var _ordersList = snapshot.data!.orders;
+                  var ordersList = snapshot.data!.orders;
                   return TabBarView(
                     children: [
-                      OrderPage(ordersList: _ordersList!, isSend: false),
-                      OrderPage(ordersList: _ordersList, isSend: true),
+                      OrderPage(ordersList: ordersList!, isSend: false),
+                      OrderPage(ordersList: ordersList, isSend: true),
                     ],
                   );
                 } else if (snapshot.hasError) {

@@ -21,7 +21,7 @@ class Orders {
   String? phone;
   String? email;
   String? comments;
-  List<Order>? order;
+  List<Order> order = [];
   Shipment? shipment;
   bool? archive;
   bool? newOrder;
@@ -39,7 +39,7 @@ class Orders {
       this.phone,
       this.email,
       this.comments,
-      this.order,
+      required this.order,
       this.shipment,
       this.archive,
       this.newOrder,
@@ -103,9 +103,10 @@ class Order {
   List<String>? color;
   int? quantity;
   int? price;
-  String? photo;
+  String photo = "";
 
-  Order({this.title, this.color, this.quantity, this.price, this.photo});
+  Order(
+      {this.title, this.color, this.quantity, this.price, required this.photo});
 
   Order.fromJson(Map<String, dynamic> json) {
     title = json['title'];

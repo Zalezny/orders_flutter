@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/utils/const_database.dart';
 import '../models/order_model.dart';
 
 class OrderPage extends StatefulWidget {
@@ -20,30 +21,24 @@ class _OrderPageState extends State<OrderPage> {
     return ListView.builder(
       reverse: true,
       itemBuilder: ((context, index) {
-        if (widget.ordersList[index].archive == widget.isSend) {
-          return Card(
-            margin: const EdgeInsets.all(16),
-            elevation: 3,
-            child: Container(
-              padding: const EdgeInsets.all(6),
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    alignment: Alignment.center,
-                    child: Text(
-                        "Zamówienie nr ${widget.ordersList[index].orderNumber}"),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(6),
-                    alignment: Alignment.center,
-                    child: Text(
-                        "${widget.ordersList[index].name} ${widget.ordersList[index].lastName}"),
-                  ),
-                ],
-              ),
+        final currItem = widget.ordersList[index];
+        if (currItem.archive == widget.isSend) {
+          return ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage("https:${currItem.order[0].photo}"),
             ),
+            title: Text(
+              "${currItem.name} ${widget.ordersList[index].lastName}",
+              style: const TextStyle(fontSize: 20),
+            ),
+            subtitle: Text(
+              "Zamówienie nr ${currItem.orderNumber}",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            trailing: currItem.newOrder!
+                ? const Icon(Icons.priority_high)
+                : const Icon(null),
+            iconColor: Colors.red,
           );
         }
         return const SizedBox(height: 0);
