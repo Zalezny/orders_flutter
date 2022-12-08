@@ -104,9 +104,15 @@ class Order {
   int? quantity;
   int? price;
   String photo = "";
+  String? size;
 
   Order(
-      {this.title, this.color, this.quantity, this.price, required this.photo});
+      {this.title,
+      this.color,
+      this.quantity,
+      this.price,
+      required this.photo,
+      this.size});
 
   Order.fromJson(Map<String, dynamic> json) {
     title = json['title'];
@@ -114,6 +120,7 @@ class Order {
     quantity = json['quantity'];
     price = json['price'];
     photo = json['photo'];
+    size = json['size'];
   }
 
   Map<String, dynamic> toJson() {
@@ -123,6 +130,7 @@ class Order {
     data['quantity'] = this.quantity;
     data['price'] = this.price;
     data['photo'] = this.photo;
+    data['size'] = this.size;
     return data;
   }
 }

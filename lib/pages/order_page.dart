@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/pages/item_page.dart';
 import 'package:testapp/utils/const_database.dart';
 import '../models/order_model.dart';
 
@@ -25,7 +26,7 @@ class _OrderPageState extends State<OrderPage> {
         if (currItem.archive == widget.isSend) {
           return ListTile(
             leading: CircleAvatar(
-              backgroundImage: NetworkImage("https:${currItem.order[0].photo}"),
+              backgroundImage: NetworkImage("$https${currItem.order[0].photo}"),
             ),
             title: Text(
               "${currItem.name} ${widget.ordersList[index].lastName}",
@@ -39,6 +40,10 @@ class _OrderPageState extends State<OrderPage> {
                 ? const Icon(Icons.priority_high)
                 : const Icon(null),
             iconColor: Colors.red,
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ItemPage(selectedOrder: currItem))),
           );
         }
         return const SizedBox(height: 0);
