@@ -63,9 +63,8 @@ class Orders {
         order!.add(new Order.fromJson(v));
       });
     }
-    shipment = json['shipment'] != null
-        ? new Shipment.fromJson(json['shipment'])
-        : null;
+    shipment =
+        json['shipment'] != null ? Shipment.fromJson(json['shipment']) : null;
     archive = json['archive'];
     newOrder = json['newOrder'];
     date = json['date'];
