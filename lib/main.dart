@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:testapp/pages/order_page.dart';
 import 'package:testapp/utils/const_database.dart';
 
@@ -17,9 +18,6 @@ class MyApp extends StatelessWidget {
 
   final ColorScheme schemeOfcolors = ColorScheme.fromSwatch().copyWith(
     primary: const Color.fromRGBO(228, 18, 67, 1),
-    // onPrimary: const Color(0x00ff5a6e),
-    secondary: const Color(0x00e83c65),
-    // onSecondary: const Color(0x00ff7392),
   );
 
   // This widget is the root of your application.
@@ -28,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'KatyaOrders',
       theme: ThemeData(
+          primarySwatch: Colors.green,
           colorScheme: schemeOfcolors,
           fontFamily: 'Roboto',
           textTheme: ThemeData.light().textTheme.copyWith(

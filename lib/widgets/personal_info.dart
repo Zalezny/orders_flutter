@@ -13,15 +13,16 @@ class PersonalInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Dane do wysyłki: "),
+        const Text("Dane do wysyłki: "),
         Text("${selectedOrder.name} ${selectedOrder.lastName}"),
         Text("${selectedOrder.street}"),
         Text("${selectedOrder.postCode} ${selectedOrder.city}"),
         Text("${selectedOrder.phone}"),
         Text("${selectedOrder.email}"),
-        selectedOrder.shipment!.point!.address!.isEmpty &&
-                selectedOrder.shipment?.point == null
-            ? const Text("")
+        selectedOrder.shipment!.point!.name!.isEmpty
+            ? const SizedBox(
+                height: 0,
+              )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -32,9 +33,9 @@ class PersonalInfo extends StatelessWidget {
                 ],
               ),
         const Text("Komentarze: "),
-        selectedOrder.comments != null
+        selectedOrder.comments!.isNotEmpty
             ? Text(selectedOrder.comments!)
-            : const Text(""),
+            : const Text("brak komentarza"),
       ],
     );
   }

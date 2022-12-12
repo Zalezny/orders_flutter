@@ -17,6 +17,16 @@ class _OrderPageState extends State<OrderPage> {
   final List<String> exampleList =
       List<String>.generate(10000, (i) => 'Item $i');
 
+  void _swipeArchiveOrder(String id, bool archiveBool) {
+    final index = widget.ordersList.indexWhere((element) => element.sId == id);
+    var obj = widget.ordersList[index];
+    obj.archive = archiveBool;
+    widget.ordersList.removeAt(index);
+    setState(() {
+      widget.ordersList.insert(index, obj);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -43,7 +53,10 @@ class _OrderPageState extends State<OrderPage> {
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ItemPage(selectedOrder: currItem))),
+                    builder: (context) => ItemPage(
+                          selectedOrder: currItem,
+                          swipeArchive: _swipeArchiveOrder,
+                        ))),
           );
         }
         return const SizedBox(height: 0);
