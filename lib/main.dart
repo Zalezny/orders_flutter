@@ -81,6 +81,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  Future<void> _pullRefresh() async {
+    setState(() {
+      _futureOrder = fetchOrders();
+    });
+  }
+
   @override
   Widget build(BuildContext context) => DefaultTabController(
         length: 2,
@@ -109,8 +115,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   var ordersList = snapshot.data!.orders;
                   return TabBarView(
                     children: [
-                      OrderPage(ordersList: ordersList!, isSend: false),
-                      OrderPage(ordersList: ordersList, isSend: true),
+                      RefreshIndicator(
+                        onRefresh: _pullRefresh,
+                        child: OrderPage(
+                            reversedOrdersList: ordersList!.reversed.toList(),
+                            isSend: false),
+                      ),
+                      RefreshIndicator(
+                        onRefresh: _pullRefresh,
+                        child: OrderPage(
+                            reversedOrdersList: ordersList.reversed.toList(),
+                            isSend: true),
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {

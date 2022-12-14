@@ -23,15 +23,19 @@ class ItemPage extends StatelessWidget {
       {required bool isArchive,
       required String dynamicUrl,
       required VoidCallback onSuccess}) async {
-    final Map<String, String> property = {'archive': isArchive.toString()};
-    const Map<String, String> headers = {'authorization': keyAuth};
+    final property = {'archive': isArchive};
+    const Map<String, String> headers = {
+      "authorization": keyAuth,
+      "Content-Type": "application/json"
+    };
     var response = await http.patch(
       Uri.parse(dynamicUrl),
-      body: property,
+      body: jsonEncode(property),
       headers: headers,
     );
 
     if (response.statusCode == 200) {
+      print(json.decode(response.body));
       Fluttertoast.showToast(
         msg: "Stan zamówienia został zmieniony na $isArchive ",
         toastLength: Toast.LENGTH_SHORT,
@@ -91,7 +95,7 @@ class ItemPage extends StatelessWidget {
                     isArchive: true,
                     dynamicUrl: dynamicUrl,
                     onSuccess: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(); // its confusing
                     }),
                 icon: const Icon(Icons.archive),
                 label: const Text('WYŚLIJ'),

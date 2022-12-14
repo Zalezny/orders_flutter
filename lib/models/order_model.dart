@@ -60,7 +60,7 @@ class Orders {
     if (json['order'] != null) {
       order = <Order>[];
       json['order'].forEach((v) {
-        order!.add(new Order.fromJson(v));
+        order.add(new Order.fromJson(v));
       });
     }
     shipment =
@@ -84,7 +84,7 @@ class Orders {
     data['email'] = this.email;
     data['comments'] = this.comments;
     if (this.order != null) {
-      data['order'] = this.order!.map((v) => v.toJson()).toList();
+      data['order'] = this.order.map((v) => v.toJson()).toList();
     }
     if (this.shipment != null) {
       data['shipment'] = this.shipment!.toJson();

@@ -5,9 +5,10 @@ import '../models/order_model.dart';
 
 class OrderPage extends StatefulWidget {
   final bool isSend;
-  final List<Orders> ordersList;
+  final List<Orders> reversedOrdersList;
 
-  const OrderPage({super.key, required this.ordersList, required this.isSend});
+  const OrderPage(
+      {super.key, required this.reversedOrdersList, required this.isSend});
 
   @override
   State<OrderPage> createState() => _OrderPageState();
@@ -18,28 +19,28 @@ class _OrderPageState extends State<OrderPage> {
       List<String>.generate(10000, (i) => 'Item $i');
 
   void _swipeArchiveOrder(String id, bool archiveBool) {
-    final index = widget.ordersList.indexWhere((element) => element.sId == id);
-    var obj = widget.ordersList[index];
+    final index =
+        widget.reversedOrdersList.indexWhere((element) => element.sId == id);
+    var obj = widget.reversedOrdersList[index];
     obj.archive = archiveBool;
-    widget.ordersList.removeAt(index);
+    widget.reversedOrdersList.removeAt(index);
     setState(() {
-      widget.ordersList.insert(index, obj);
+      widget.reversedOrdersList.insert(index, obj);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      reverse: true,
       itemBuilder: ((context, index) {
-        final currItem = widget.ordersList[index];
+        final currItem = widget.reversedOrdersList[index];
         if (currItem.archive == widget.isSend) {
           return ListTile(
             leading: CircleAvatar(
               backgroundImage: NetworkImage("$https${currItem.order[0].photo}"),
             ),
             title: Text(
-              "${currItem.name} ${widget.ordersList[index].lastName}",
+              "${currItem.name} ${widget.reversedOrdersList[index].lastName}",
               style: const TextStyle(fontSize: 20),
             ),
             subtitle: Text(
@@ -61,7 +62,7 @@ class _OrderPageState extends State<OrderPage> {
         }
         return const SizedBox(height: 0);
       }),
-      itemCount: widget.ordersList.length,
+      itemCount: widget.reversedOrdersList.length,
     );
   }
 }
