@@ -1,9 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:testapp/pages/order_page.dart';
 import 'package:testapp/utils/const_database.dart';
+import 'package:testapp/utils/utils.dart';
+import 'package:testapp/widgets/custom_tab_view.dart';
 
 import 'models/order_model.dart';
 
@@ -26,7 +30,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'KatyaOrders',
       theme: ThemeData(
-          primarySwatch: Colors.green,
+          primarySwatch: createMaterialColor(const Color(0x00e94168)),
           colorScheme: schemeOfcolors,
           fontFamily: 'Roboto',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -75,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
-      return OrderList.fromJson(body);
+      var returnValue = OrderList.fromJson(body);
+      return returnValue;
     } else {
       throw Exception('Failed to load orders');
     }
@@ -88,54 +93,83 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => DefaultTabController(
-        length: 2,
-        child: Scaffold(
-            appBar: AppBar(
-              title: Text(widget.title),
-              bottom: TabBar(tabs: [
-                Tab(
-                  child: Text(
-                    'Do wysyłki',
-                    style: Theme.of(context).primaryTextTheme.titleLarge,
-                  ),
+  Widget build(BuildContext context) {
+    final dynamic appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text(widget.title),
+          )
+        : AppBar(
+            title: Text(widget.title),
+            bottom: TabBar(tabs: [
+              Tab(
+                child: Text(
+                  'Do wysyłki',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
-                Tab(
-                  child: Text(
-                    'Wysłane',
-                    style: Theme.of(context).primaryTextTheme.titleLarge,
-                  ),
+              ),
+              Tab(
+                child: Text(
+                  'Wysłane',
+                  style: Theme.of(context).primaryTextTheme.titleLarge,
                 ),
-              ]),
-            ),
-            body: FutureBuilder(
-              future: _futureOrder,
-              builder: (ctx, snapshot) {
-                if (snapshot.hasData) {
-                  var ordersList = snapshot.data!.orders;
-                  return TabBarView(
-                    children: [
-                      RefreshIndicator(
-                        onRefresh: _pullRefresh,
-                        child: OrderPage(
-                            reversedOrdersList: ordersList!.reversed.toList(),
-                            isSend: false),
+              ),
+            ]),
+          ) as PreferredSizeWidget;
+
+    final bodyPage = Platform.isIOS
+        ? CupertinoPageScaffold(
+            navigationBar: appBar,
+            child: FutureBuilder(
+                future: _futureOrder,
+                builder: (ctx, snapshot) {
+                  if (snapshot.hasData) {
+                    var ordersList = snapshot.data!.orders;
+                    return CupertinoTabScaffold(
+                      tabBar: CupertinoTabBar(
+                          items: const <BottomNavigationBarItem>[
+                            BottomNavigationBarItem(
+                                icon: Icon(CupertinoIcons.cart),
+                                label: 'Do wysłania'),
+                            BottomNavigationBarItem(
+                                icon: Icon(CupertinoIcons.chevron_up_square),
+                                label: 'Wysłane'),
+                          ]),
+                      tabBuilder: (ctx, index) => CustomTabView(
+                        reversedOrdersList: ordersList!.reversed.toList(),
+                        pullRefresh: _pullRefresh,
+                        index: index,
                       ),
-                      RefreshIndicator(
-                        onRefresh: _pullRefresh,
-                        child: OrderPage(
-                            reversedOrdersList: ordersList.reversed.toList(),
-                            isSend: true),
-                      ),
-                    ],
+                    );
+                  } else if (snapshot.hasError) {
+                    throw Exception(snapshot.error);
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
                   );
-                } else if (snapshot.hasError) {
-                  throw Exception(snapshot.error);
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            )),
-      );
+                }),
+          )
+        : DefaultTabController(
+            length: 2,
+            child: Scaffold(
+                appBar: appBar,
+                body: FutureBuilder(
+                  future: _futureOrder,
+                  builder: (ctx, snapshot) {
+                    if (snapshot.hasData) {
+                      var ordersList = snapshot.data!.orders;
+                      return CustomTabView(
+                          reversedOrdersList: ordersList!.reversed.toList(),
+                          pullRefresh: _pullRefresh);
+                    } else if (snapshot.hasError) {
+                      throw Exception(snapshot.error);
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                )),
+          );
+
+    return bodyPage;
+  }
 }
