@@ -116,6 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ]),
           ) as PreferredSizeWidget;
 
+//TODO: ListTile doesnt work on IOS WE HAVE TO CHANGE IT!
     final bodyPage = Platform.isIOS
         ? CupertinoPageScaffold(
             navigationBar: appBar,
