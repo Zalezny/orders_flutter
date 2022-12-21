@@ -13,7 +13,10 @@ class PersonalInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Dane do wysyłki: "),
+        const Text(
+          "Dane do wysyłki: ",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         Text("${selectedOrder.name} ${selectedOrder.lastName}"),
         Text("${selectedOrder.street}"),
         Text("${selectedOrder.postCode} ${selectedOrder.city}"),
@@ -32,7 +35,10 @@ class PersonalInfo extends StatelessWidget {
                   Text(selectedOrder.shipment!.point!.description!),
                 ],
               ),
-        const Text("Komentarze: "),
+        const Text(
+          "Komentarze: ",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         selectedOrder.comments!.isNotEmpty
             ? Text(selectedOrder.comments!)
             : const Text("brak komentarza"),

@@ -27,29 +27,50 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'KatyaOrders',
-      theme: ThemeData(
-          primarySwatch: createMaterialColor(const Color(0x00e94168)),
-          colorScheme: schemeOfcolors,
-          fontFamily: 'Roboto',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                titleLarge: const TextStyle(
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-                titleMedium: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
-                titleSmall: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12),
-              )),
-      home: const MyHomePage(title: 'Zamówienia'),
-    );
+    return Platform.isIOS
+        ? const CupertinoApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+              DefaultMaterialLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+              DefaultCupertinoLocalizations.delegate,
+            ],
+            title: 'Flutter Demo',
+            theme: CupertinoThemeData(
+              brightness: Brightness.light,
+              primaryColor: Color.fromARGB(255, 255, 0, 60),
+              // textTheme: CupertinoTextThemeData(
+              //     navActionTextStyle:
+              //         TextStyle(color: Color.fromARGB(255, 255, 0, 60)),
+              //     textStyle: TextStyle(
+              //         color: CupertinoColors.black,
+              //         decorationColor: Color.fromARGB(255, 255, 0, 60)))
+            ),
+            home: MyHomePage(title: 'Home Page'),
+          )
+        : MaterialApp(
+            title: 'KatyaOrders',
+            theme: ThemeData(
+                primarySwatch: createMaterialColor(const Color(0x00e94168)),
+                colorScheme: schemeOfcolors,
+                fontFamily: 'Roboto',
+                textTheme: ThemeData.light().textTheme.copyWith(
+                      titleLarge: const TextStyle(
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      titleMedium: const TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
+                      titleSmall: const TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12),
+                    )),
+            home: const MyHomePage(title: 'Zamówienia'),
+          );
   }
 }
 
@@ -94,51 +115,51 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final dynamic appBar = Platform.isIOS
-        ? CupertinoNavigationBar(
-            middle: Text(widget.title),
-          )
-        : AppBar(
-            title: Text(widget.title),
-            bottom: TabBar(tabs: [
-              Tab(
-                child: Text(
-                  'Do wysyłki',
-                  style: Theme.of(context).primaryTextTheme.titleLarge,
-                ),
-              ),
-              Tab(
-                child: Text(
-                  'Wysłane',
-                  style: Theme.of(context).primaryTextTheme.titleLarge,
-                ),
-              ),
-            ]),
-          ) as PreferredSizeWidget;
+    final dynamic appBar = AppBar(
+      title: Text(widget.title),
+      bottom: TabBar(tabs: [
+        Tab(
+          child: Text(
+            'Do wysyłki',
+            style: Theme.of(context).primaryTextTheme.titleLarge,
+          ),
+        ),
+        Tab(
+          child: Text(
+            'Wysłane',
+            style: Theme.of(context).primaryTextTheme.titleLarge,
+          ),
+        ),
+      ]),
+    );
 
-//TODO: ListTile doesnt work on IOS WE HAVE TO CHANGE IT!
     final bodyPage = Platform.isIOS
         ? CupertinoPageScaffold(
-            navigationBar: appBar,
             child: FutureBuilder(
                 future: _futureOrder,
                 builder: (ctx, snapshot) {
                   if (snapshot.hasData) {
                     var ordersList = snapshot.data!.orders;
-                    return CupertinoTabScaffold(
-                      tabBar: CupertinoTabBar(
-                          items: const <BottomNavigationBarItem>[
-                            BottomNavigationBarItem(
-                                icon: Icon(CupertinoIcons.cart),
-                                label: 'Do wysłania'),
-                            BottomNavigationBarItem(
-                                icon: Icon(CupertinoIcons.chevron_up_square),
-                                label: 'Wysłane'),
-                          ]),
-                      tabBuilder: (ctx, index) => CustomTabView(
-                        reversedOrdersList: ordersList!.reversed.toList(),
-                        pullRefresh: _pullRefresh,
-                        index: index,
+                    return SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CupertinoTabScaffold(
+                          tabBar: CupertinoTabBar(
+                              items: const <BottomNavigationBarItem>[
+                                BottomNavigationBarItem(
+                                    icon: Icon(CupertinoIcons.cart),
+                                    label: 'Do wysłania'),
+                                BottomNavigationBarItem(
+                                    icon:
+                                        Icon(CupertinoIcons.chevron_up_square),
+                                    label: 'Wysłane'),
+                              ]),
+                          tabBuilder: (ctx, index) => CustomTabView(
+                            reversedOrdersList: ordersList!.reversed.toList(),
+                            pullRefresh: _pullRefresh,
+                            index: index,
+                          ),
+                        ),
                       ),
                     );
                   } else if (snapshot.hasError) {
