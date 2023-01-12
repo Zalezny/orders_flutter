@@ -1,6 +1,6 @@
-# testapp
+# OrdersFlutter
 
-A new Flutter project.
+A Flutter project similar to OrdersKatya-P- project. It configured to iOS and Android
 
 ## Getting Started
 
