@@ -4,9 +4,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:testapp/di/dependency_injection.dart';
 import 'package:testapp/pages/order_page.dart';
-import 'package:testapp/utils/const_database.dart';
 import 'package:testapp/utils/utils.dart';
+import 'package:testapp/web_api/const_database.dart';
 import 'package:testapp/widgets/custom_tab_view.dart';
 
 import 'models/order_model.dart';
@@ -18,7 +19,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  MyApp({super.key}) {
+    setupDependencyInjection();
+  }
 
   final ColorScheme schemeOfcolors = ColorScheme.fromSwatch().copyWith(
     primary: const Color.fromRGBO(228, 18, 67, 1),
@@ -92,9 +95,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   static Future<OrderList> fetchOrders() async {
-    const Map<String, String> headers = {'authorization': keyAuth};
+    Map<String, String> headers = {'authorization': ConstDatabase.keyAuth};
     final response = await http.get(
-      Uri.parse(orderUrl),
+      Uri.parse(ConstDatabase.orderUrl),
       headers: headers,
     );
 

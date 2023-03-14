@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:testapp/pages/item_page.dart';
-import 'package:testapp/utils/const_database.dart';
+
 import '../models/order_model.dart';
 
 class OrderPage extends StatefulWidget {
@@ -69,7 +69,7 @@ class _OrderPageState extends State<OrderPage> {
               : ListTile(
                   leading: CircleAvatar(
                     backgroundImage:
-                        NetworkImage("$https${currItem.order[0].photo}"),
+                        NetworkImage("https://${currItem.order[0].photo}"),
                   ),
                   title: Text(
                     "${currItem.name} ${widget.reversedOrdersList[index].lastName}",
