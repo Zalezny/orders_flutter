@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:testapp/main.dart';
 import 'package:testapp/models/order_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:testapp/web_api/connections/orders_connection.dart';
 
 import '../widgets/cart.dart';
 import '../widgets/personal_info.dart';
@@ -16,42 +18,15 @@ import '../widgets/personal_info.dart';
 class ItemPage extends StatelessWidget {
   final Orders selectedOrder;
   final Function swipeArchive;
+  final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
 
-  const ItemPage(
-      {super.key, required this.selectedOrder, required this.swipeArchive});
-
-  void _sendPatchToDatabase(
-      {required bool isArchive,
-      required String dynamicUrl,
-      required VoidCallback onSuccess}) async {
-    final property = {'archive': isArchive};
-    const Map<String, String> headers = {
-      "authorization": keyAuth,
-      "Content-Type": "application/json"
-    };
-    var response = await http.patch(
-      Uri.parse(dynamicUrl),
-      body: jsonEncode(property),
-      headers: headers,
-    );
-
-    if (response.statusCode == 200) {
-      print(json.decode(response.body));
-      Fluttertoast.showToast(
-        msg: "Stan zamówienia został zmieniony na $isArchive ",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-      );
-      swipeArchive(selectedOrder.sId, isArchive);
-      onSuccess.call(); //call about finish async function (for build context)
-    } else {
-      throw Exception('Failed to patch, StatusCode: ${response.statusCode}');
-    }
-  }
+  ItemPage(
+      {super.key, required this.selectedOrder, required this.swipeArchive,});
 
   @override
   Widget build(BuildContext context) {
-    final dynamicUrl = orderUrl + selectedOrder.sId!;
+    final orderId = selectedOrder.sId!;
+
     final dynamic appBar = Platform.isIOS
         ? CupertinoNavigationBar(
             middle: Text(
@@ -63,10 +38,11 @@ class ItemPage extends StatelessWidget {
                   ? const Icon(CupertinoIcons.archivebox_fill)
                   : const Icon(CupertinoIcons.archivebox),
               onPressed: () {
-                _sendPatchToDatabase(
+                ordersConnection.patchIsArchive(
                     isArchive: !(selectedOrder.archive!),
-                    dynamicUrl: dynamicUrl,
+                    id: orderId,
                     onSuccess: () {
+                      swipeArchive(selectedOrder.sId, !(selectedOrder.archive!));
                       Navigator.of(context).pop(); // its confusing
                     });
               },
@@ -106,9 +82,9 @@ class ItemPage extends StatelessWidget {
                 FloatingActionButtonLocation.centerFloat,
             floatingActionButton: selectedOrder.archive!
                 ? FloatingActionButton.extended(
-                    onPressed: () => _sendPatchToDatabase(
+                    onPressed: () => ordersConnection.patchIsArchive(
                         isArchive: false,
-                        dynamicUrl: dynamicUrl,
+                        id: orderId,
                         onSuccess: () {
                           Navigator.of(context).pop();
                         }),
@@ -117,9 +93,9 @@ class ItemPage extends StatelessWidget {
                     backgroundColor: Theme.of(context).primaryColorDark,
                   )
                 : FloatingActionButton.extended(
-                    onPressed: () => _sendPatchToDatabase(
+                    onPressed: () => ordersConnection.patchIsArchive(
                         isArchive: true,
-                        dynamicUrl: dynamicUrl,
+                        id: orderId,
                         onSuccess: () {
                           Navigator.of(context).pop(); // its confusing
                         }),

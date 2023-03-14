@@ -24,7 +24,7 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchIsArchive(bool isArchive, String id, VoidCallback onSuccess) async {
+  Future<void> patchIsArchive({required bool isArchive, required String id, required VoidCallback onSuccess}) async {
     final body = {'archive': isArchive};
     final Response response = await apiService.patch(ConstDatabase.dynamicOrderUrl(id), body);
 
