@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/web_api/dto/orders.dart';
 
-import '../models/order_model.dart';
-
-class Cart extends StatelessWidget {
+class SelectedOrderCart extends StatelessWidget {
   final Orders selectedOrder;
 
-  const Cart({super.key, required this.selectedOrder});
+  const SelectedOrderCart({super.key, required this.selectedOrder});
 
   int addAllPrices() {
     int sum = 0;
@@ -28,7 +27,7 @@ class Cart extends StatelessWidget {
               children: [
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Image.network(
-                    'https//${cart[index].photo}',
+                    'https:${cart[index].photo}',
                     height: 150,
                     width: 100,
                   ),

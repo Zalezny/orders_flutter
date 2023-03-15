@@ -6,10 +6,10 @@ import 'package:get_it/get_it.dart';
 import 'package:testapp/di/dependency_injection.dart';
 import 'package:testapp/utils/utils.dart';
 import 'package:testapp/web_api/connections/orders_connection.dart';
-import 'package:testapp/widgets/custom_tab_view.dart';
-import 'package:testapp/widgets/custom_app.dart';
+import 'package:testapp/custom_widgets/custom_tab_view.dart';
+import 'package:testapp/custom_widgets/custom_app.dart';
 
-import 'models/order_model.dart';
+import 'web_api/dto/order_list_dto.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -41,7 +41,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
-  late Future<OrderList> _futureOrder;
+  late Future<OrderListDto> _futureOrder;
 
   @override
   void initState() {

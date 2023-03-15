@@ -2,11 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
-import '../models/order_model.dart';
-import '../pages/order_page.dart';
+import 'package:testapp/web_api/dto/orders.dart';
+import '../pages/order_page/order_page.dart';
 
 class CustomTabView extends StatelessWidget {
   final List<Orders> reversedOrdersList;

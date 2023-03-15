@@ -1,27 +1,22 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:testapp/main.dart';
-import 'package:testapp/models/order_model.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:testapp/web_api/connections/orders_connection.dart';
+import 'package:testapp/web_api/dto/orders.dart';
+import 'selected_order_page_widgets/selected_order_cart.dart';
+import 'selected_order_page_widgets/selected_order_personal_info.dart';
 
-import '../widgets/cart.dart';
-import '../widgets/personal_info.dart';
-
-class ItemPage extends StatelessWidget {
+class SelectedOrderPage extends StatelessWidget {
   final Orders selectedOrder;
   final Function swipeArchive;
   final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
 
-  ItemPage(
-      {super.key, required this.selectedOrder, required this.swipeArchive,});
+  SelectedOrderPage({
+    super.key,
+    required this.selectedOrder,
+    required this.swipeArchive,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +37,8 @@ class ItemPage extends StatelessWidget {
                     isArchive: !(selectedOrder.archive!),
                     id: orderId,
                     onSuccess: () {
-                      swipeArchive(selectedOrder.sId, !(selectedOrder.archive!));
+                      swipeArchive(
+                          selectedOrder.sId, !(selectedOrder.archive!));
                       Navigator.of(context).pop(); // its confusing
                     });
               },
@@ -62,8 +58,8 @@ class ItemPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Cart(selectedOrder: selectedOrder),
-              PersonalInfo(selectedOrder: selectedOrder)
+              SelectedOrderCart(selectedOrder: selectedOrder),
+              SelectedOrderPersonalInfo(selectedOrder: selectedOrder)
             ],
           ),
         ),

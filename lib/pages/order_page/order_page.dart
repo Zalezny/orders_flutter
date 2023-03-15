@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:testapp/pages/item_page.dart';
-
-import '../models/order_model.dart';
+import 'package:testapp/pages/selected_order_page/selected_order_page.dart';
+import 'package:testapp/web_api/dto/orders.dart';
 
 class OrderPage extends StatefulWidget {
   final bool isSend;
@@ -42,7 +39,7 @@ class _OrderPageState extends State<OrderPage> {
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ItemPage(
+                      builder: (context) => SelectedOrderPage(
                             selectedOrder: currItem,
                             swipeArchive: _swipeArchiveOrder,
                           ))),

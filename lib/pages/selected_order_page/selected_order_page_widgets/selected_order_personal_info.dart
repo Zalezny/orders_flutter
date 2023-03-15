@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:testapp/web_api/dto/orders.dart';
 
-import '../models/order_model.dart';
-
-class PersonalInfo extends StatelessWidget {
+class SelectedOrderPersonalInfo extends StatelessWidget {
   final Orders selectedOrder;
-  const PersonalInfo({super.key, required this.selectedOrder});
+  const SelectedOrderPersonalInfo({super.key, required this.selectedOrder});
 
   @override
   Widget build(BuildContext context) {
