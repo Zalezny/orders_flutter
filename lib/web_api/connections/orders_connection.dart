@@ -11,7 +11,7 @@ class OrdersConnection {
   final apiService = GetIt.I<ApiService>();
 
   Future<OrderList> getOrders() async {
-    final Response response = await apiService.get(ConstDatabase.orderUrl);
+    final Response response = await apiService.get(ConstDatabase.ordersUrl);
     
     if(response.statusCode == 404)
     {

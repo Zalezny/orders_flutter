@@ -44,4 +44,4 @@ app.*.map.json
 /android/app/release
 
 # Private files
-/lib/utils/const_database.dart
+lib/web_api/const_database.dart

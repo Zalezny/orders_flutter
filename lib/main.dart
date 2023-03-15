@@ -1,13 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:testapp/di/dependency_injection.dart';
-import 'package:testapp/pages/order_page.dart';
 import 'package:testapp/utils/utils.dart';
-import 'package:testapp/web_api/const_database.dart';
+import 'package:testapp/web_api/connections/orders_connection.dart';
 import 'package:testapp/widgets/custom_tab_view.dart';
 
 import 'models/order_model.dart';
@@ -31,15 +29,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
-        ? const CupertinoApp(
+        ? CupertinoApp(
             debugShowCheckedModeBanner: false,
-            localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+            localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
               DefaultMaterialLocalizations.delegate,
               DefaultWidgetsLocalizations.delegate,
               DefaultCupertinoLocalizations.delegate,
             ],
             title: 'Flutter Demo',
-            theme: CupertinoThemeData(
+            theme: const CupertinoThemeData(
               brightness: Brightness.light,
               primaryColor: Color.fromARGB(255, 255, 0, 60),
               // textTheme: CupertinoTextThemeData(
@@ -72,13 +70,13 @@ class MyApp extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 12),
                     )),
-            home: const MyHomePage(title: 'Zamówienia'),
+            home: MyHomePage(title: 'Zamówienia'),
           );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  MyHomePage({super.key, required this.title});
   final String title;
 
   @override
@@ -86,33 +84,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
   late Future<OrderList> _futureOrder;
 
   @override
   void initState() {
     super.initState();
-    _futureOrder = fetchOrders();
-  }
-
-  static Future<OrderList> fetchOrders() async {
-    Map<String, String> headers = {'authorization': ConstDatabase.keyAuth};
-    final response = await http.get(
-      Uri.parse(ConstDatabase.orderUrl),
-      headers: headers,
-    );
-
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body);
-      var returnValue = OrderList.fromJson(body);
-      return returnValue;
-    } else {
-      throw Exception('Failed to load orders');
-    }
+    _futureOrder = ordersConnection.getOrders();
   }
 
   Future<void> _pullRefresh() async {
     setState(() {
-      _futureOrder = fetchOrders();
+      _futureOrder = ordersConnection.getOrders();
     });
   }
 

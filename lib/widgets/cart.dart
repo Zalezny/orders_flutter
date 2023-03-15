@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/utils/const_database.dart';
 
 import '../models/order_model.dart';
 
@@ -29,7 +28,7 @@ class Cart extends StatelessWidget {
               children: [
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Image.network(
-                    '$https${cart[index].photo}',
+                    'https//${cart[index].photo}',
                     height: 150,
                     width: 100,
                   ),

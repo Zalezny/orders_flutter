@@ -6,5 +6,7 @@ void setupDependencyInjection() {
   GetIt.I.registerLazySingleton(
     () => ApiService(),
   );
-  GetIt.I.registerLazySingleton(() => OrdersConnection(),);
+  GetIt.I.registerLazySingleton(
+    () => OrdersConnection(),
+  );
 }
