@@ -17,9 +17,6 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
-  final List<String> exampleList =
-      List<String>.generate(10000, (i) => 'Item $i');
-
   void _swipeArchiveOrder(String id, bool archiveBool) {
     final index =
         widget.reversedOrdersList.indexWhere((element) => element.sId == id);
@@ -38,59 +35,40 @@ class _OrderPageState extends State<OrderPage> {
         final currItem = widget.reversedOrdersList[index];
 
         if (currItem.archive == widget.isSend) {
-          return Platform.isIOS
-              ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ItemPage(
-                                  selectedOrder: currItem,
-                                  swipeArchive: _swipeArchiveOrder,
-                                ))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Zamówienie nr ${currItem.orderNumber}",
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        Text(
-                          "${currItem.name} ${currItem.lastName}",
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const Divider()
-                      ],
-                    ),
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ItemPage(
+                            selectedOrder: currItem,
+                            swipeArchive: _swipeArchiveOrder,
+                          ))),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 15,
                   ),
-                )
-              : ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage:
-                        NetworkImage("https://${currItem.order[0].photo}"),
-                  ),
-                  title: Text(
-                    "${currItem.name} ${widget.reversedOrdersList[index].lastName}",
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  subtitle: Text(
+                  Text(
                     "Zamówienie nr ${currItem.orderNumber}",
-                    style: Theme.of(context).textTheme.bodyLarge,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
-                  trailing: currItem.newOrder!
-                      ? const Icon(Icons.priority_high)
-                      : const Icon(null),
-                  iconColor: Colors.red,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ItemPage(
-                                selectedOrder: currItem,
-                                swipeArchive: _swipeArchiveOrder,
-                              ))),
-                );
+                  Text(
+                    "${currItem.name} ${currItem.lastName}",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Divider()
+                ],
+              ),
+            ),
+          );
         }
         return const SizedBox(height: 0);
       }),
