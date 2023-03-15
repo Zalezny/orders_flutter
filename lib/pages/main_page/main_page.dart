@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:testapp/pages/main_page/main_page_widgets/main_future_builder.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();

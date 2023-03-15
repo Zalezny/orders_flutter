@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:testapp/web_api/dto/orders.dart';
-import '../pages/order_page/order_page.dart';
+import '../pages/orders_page/orders_page.dart';
 
 class CustomTabView extends StatefulWidget {
   final List<Orders> reversedOrdersList;
-  Future<void> Function() pullRefresh;
+  final Future<void> Function() pullRefresh;
   final int index;
 
-  CustomTabView(
+  const CustomTabView(
       {super.key,
       required this.reversedOrdersList,
       required this.pullRefresh,
@@ -26,11 +26,11 @@ class _CustomTabViewState extends State<CustomTabView> {
     final listOfTabs = [
       RefreshIndicator(
         onRefresh: widget.pullRefresh,
-        child: OrderPage(reversedOrdersList: widget.reversedOrdersList, isSend: false),
+        child: OrdersPage(reversedOrdersList: widget.reversedOrdersList, isSend: false),
       ),
       RefreshIndicator(
         onRefresh: widget.pullRefresh,
-        child: OrderPage(reversedOrdersList: widget.reversedOrdersList, isSend: true),
+        child: OrdersPage(reversedOrdersList: widget.reversedOrdersList, isSend: true),
       ),
     ];
 
