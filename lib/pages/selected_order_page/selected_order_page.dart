@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
+import 'package:testapp/pages/selected_order_page/selected_order_page_widgets/selected_order_floating_action_button.dart';
 import 'package:testapp/web_api/connections/orders_connection.dart';
 import 'package:testapp/web_api/dto/orders.dart';
 import 'selected_order_page_widgets/selected_order_cart.dart';
@@ -76,29 +77,10 @@ class SelectedOrderPage extends StatelessWidget {
             body: pageBody,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: selectedOrder.archive!
-                ? FloatingActionButton.extended(
-                    onPressed: () => ordersConnection.patchIsArchive(
-                        isArchive: false,
-                        id: orderId,
-                        onSuccess: () {
-                          Navigator.of(context).pop();
-                        }),
-                    icon: const Icon(Icons.unarchive),
-                    label: const Text('COFNIJ WYSŁANIE'),
-                    backgroundColor: Theme.of(context).primaryColorDark,
-                  )
-                : FloatingActionButton.extended(
-                    onPressed: () => ordersConnection.patchIsArchive(
-                        isArchive: true,
-                        id: orderId,
-                        onSuccess: () {
-                          Navigator.of(context).pop(); // its confusing
-                        }),
-                    icon: const Icon(Icons.archive),
-                    label: const Text('WYŚLIJ'),
-                    backgroundColor: Theme.of(context).primaryColorDark,
-                    foregroundColor: Colors.white,
-                  ));
+            floatingActionButton: SelectedOrderFloatingActionButton(
+              isArchive: selectedOrder.archive!,
+              orderId: orderId,
+            ),
+          );
   }
 }

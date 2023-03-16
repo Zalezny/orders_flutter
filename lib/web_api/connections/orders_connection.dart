@@ -26,7 +26,8 @@ class OrdersConnection {
 
   Future<void> patchIsArchive({required bool isArchive, required String id, required VoidCallback onSuccess}) async {
     final Map<String,String> body = {'archive': isArchive.toString()};
-    final Response response = await apiService.patch(ConstDatabase.dynamicOrderUrl(id), body);
+    final link = ConstDatabase.dynamicOrderUrl(id);
+    final Response response = await apiService.patch(link, body);
 
     if(response.statusCode == 404) {
       throw Exception('Failed to patch, StatusCode: ${response.statusCode}');
