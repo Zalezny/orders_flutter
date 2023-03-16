@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:testapp/custom_widgets/custom_tab_view.dart';
+import 'package:testapp/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
 import 'package:testapp/web_api/connections/orders_connection.dart';
 import 'package:testapp/web_api/dto/order_list_dto.dart';
 
@@ -55,7 +55,7 @@ class _MainFutureBuilderState extends State<MainFutureBuilder> {
             builder: (ctx, snapshot) {
               if (snapshot.hasData) {
                 var ordersList = snapshot.data!.orders;
-                return CustomTabView(
+                return MainCustomTabView(
                     reversedOrdersList: ordersList!.reversed.toList(),
                     pullRefresh: _pullRefresh);
               } else if (snapshot.hasError) {

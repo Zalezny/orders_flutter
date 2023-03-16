@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:testapp/custom_widgets/custom_tab_view.dart';
+import 'package:testapp/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
 import 'package:testapp/web_api/dto/orders.dart';
 
 class MainCupertinoTabBar extends StatelessWidget {
@@ -30,7 +30,7 @@ class MainCupertinoTabBar extends StatelessWidget {
               ),
             ],
           ),
-          tabBuilder: (ctx, index) => CustomTabView(
+          tabBuilder: (ctx, index) => MainCustomTabView(
             reversedOrdersList: ordersList.reversed.toList(),
             pullRefresh: pullRefresh,
             index: index,

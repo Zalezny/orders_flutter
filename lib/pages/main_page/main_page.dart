@@ -23,20 +23,14 @@ class _MainPageState extends State<MainPage> {
             child: Scaffold(
               appBar: AppBar(
                 title: const Text("Zamówienia"),
-                bottom: TabBar(tabs: [
-                  Tab(
-                    child: Text(
-                      'Do wysyłki',
-                      style: Theme.of(context).primaryTextTheme.titleLarge,
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      'Wysłane',
-                      style: Theme.of(context).primaryTextTheme.titleLarge,
-                    ),
-                  ),
-                ]),
+                bottom: TabBar(
+                  indicatorSize: TabBarIndicatorSize.label,
+                    indicatorColor: Colors.white,
+                    labelStyle: Theme.of(context).primaryTextTheme.titleLarge,
+                    tabs: const [
+                      Tab(text: 'Do wysyłki'),
+                      Tab(text: 'Wysłane'),
+                    ]),
               ),
               body: const MainFutureBuilder(),
             ));
