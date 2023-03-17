@@ -5,7 +5,6 @@ import 'package:testapp/web_api/const_database.dart';
 class ApiService {
   Map<String, String> headers = {
     'authorization': ConstDatabase.keyAuth,
-    // "Content-Type": "application/json",
   };
 
   Future<http.Response> get(String uri) async {
@@ -16,12 +15,14 @@ class ApiService {
     );
   }
 
-  Future<http.Response> patch(String uri, Map<String, String> toPatchData) async {
+  Future<http.Response> patch(
+    
+      String uri, Map<String, String> toPatchData) async {
+        headers['Content-Type'] = 'application/json';
     return http.patch(
       Uri.parse(uri),
       headers: headers,
-      body: toPatchData,
+      body: json.encode(toPatchData),
     );
   }
 }
-

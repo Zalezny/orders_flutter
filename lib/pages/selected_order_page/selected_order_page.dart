@@ -80,6 +80,10 @@ class SelectedOrderPage extends StatelessWidget {
             floatingActionButton: SelectedOrderFloatingActionButton(
               isArchive: selectedOrder.archive!,
               orderId: orderId,
+              onPatchSuccess: () {
+                swipeArchive(selectedOrder.sId, !(selectedOrder.archive!));
+                Navigator.of(context).pop();
+              },
             ),
           );
   }
