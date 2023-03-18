@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/pages/selected_order_page/selected_order_page_widgets/selected_order_cart_item.dart';
 import 'package:testapp/web_api/dto/orders.dart';
 
 class SelectedOrderCart extends StatelessWidget {
@@ -23,7 +24,37 @@ class SelectedOrderCart extends StatelessWidget {
       child: Column(
         children: [
           ListView.builder(
-            itemBuilder: (ctx, index) => Column(
+            itemBuilder: (ctx, index) =>
+                SelectedOrderCartItem(itemCart: cart[index]),
+            itemCount: cart.length,
+            shrinkWrap: true,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Dostawa: ${selectedOrder.shipment?.method?.kind}"),
+                Text("${selectedOrder.shipment?.method?.price} zł"),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Suma: "),
+                Text("${addAllPrices().toString()} zł"),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+/**Column(
               children: [
                 Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Image.network(
@@ -73,32 +104,4 @@ class SelectedOrderCart extends StatelessWidget {
                   color: Colors.black,
                 )
               ],
-            ),
-            itemCount: cart.length,
-            shrinkWrap: true,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Dostawa: ${selectedOrder.shipment?.method?.kind}"),
-                Text("${selectedOrder.shipment?.method?.price} zł"),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text("Suma: "),
-                Text("${addAllPrices().toString()} zł"),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
+            ), */
