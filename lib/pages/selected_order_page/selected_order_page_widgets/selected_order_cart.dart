@@ -34,8 +34,14 @@ class SelectedOrderCart extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Dostawa: ${selectedOrder.shipment?.method?.kind}"),
-                Text("${selectedOrder.shipment?.method?.price} zł"),
+                Text(
+                  "Dostawa: ${selectedOrder.shipment?.method?.kind}",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                Text(
+                  "${selectedOrder.shipment?.method?.price} zł",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ],
             ),
           ),
@@ -44,8 +50,14 @@ class SelectedOrderCart extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Suma: "),
-                Text("${addAllPrices().toString()} zł"),
+                Text(
+                  "Suma: ",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                Text(
+                  "${addAllPrices().toString()} zł",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ],
             ),
           )
@@ -54,54 +66,3 @@ class SelectedOrderCart extends StatelessWidget {
     );
   }
 }
-/**Column(
-              children: [
-                Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Image.network(
-                    'https:${cart[index].photo}',
-                    height: 150,
-                    width: 100,
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                          top: 10, left: 8.0, right: 8.0, bottom: 1.0),
-                      alignment: Alignment.topCenter,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            cart[index].title!,
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: cart[index].color!.isEmpty
-                                          ? Text("rozmiar: ${cart[index].size}")
-                                          : Text("kolor: ${cart[index].color}"),
-                                    ),
-                                    Text("ilość: ${cart[index].quantity}")
-                                  ],
-                                ),
-                              ),
-                              Text("${cart[index].price} zł",
-                                  style:
-                                      Theme.of(context).textTheme.titleLarge),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ]),
-                const Divider(
-                  color: Colors.black,
-                )
-              ],
-            ), */

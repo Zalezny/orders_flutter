@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/custom_widgets/text_with_margin.dart';
 import 'package:testapp/web_api/dto/orders.dart';
 
 class SelectedOrderPersonalInfo extends StatelessWidget {
@@ -7,18 +8,40 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.headlineSmall;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        TextWithMargin(
           "Dane do wysyłki: ",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          top: 4,
         ),
-        Text("${selectedOrder.name} ${selectedOrder.lastName}"),
-        Text("${selectedOrder.street}"),
-        Text("${selectedOrder.postCode} ${selectedOrder.city}"),
-        Text("${selectedOrder.phone}"),
-        Text("${selectedOrder.email}"),
+        TextWithMargin(
+          "${selectedOrder.name} ${selectedOrder.lastName}",
+          style: textStyle,
+          top: 4,
+        ),
+        TextWithMargin(
+          "${selectedOrder.street}",
+          style: textStyle,
+          top: 4,
+        ),
+        TextWithMargin(
+          "${selectedOrder.postCode} ${selectedOrder.city}",
+          style: textStyle,
+          top: 4,
+        ),
+        TextWithMargin(
+          "${selectedOrder.phone}",
+          style: textStyle,
+          top: 4,
+        ),
+        TextWithMargin(
+          "${selectedOrder.email}",
+          style: textStyle,
+          top: 4,
+        ),
         selectedOrder.shipment!.point!.name!.isEmpty
             ? const SizedBox(
                 height: 0,
@@ -26,10 +49,26 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Paczkomat: "),
-                  Text(selectedOrder.shipment!.point!.name!),
-                  Text(selectedOrder.shipment!.point!.address!),
-                  Text(selectedOrder.shipment!.point!.description!),
+                  TextWithMargin(
+                    "Paczkomat: ",
+                    style: textStyle,
+                    top: 4,
+                  ),
+                  TextWithMargin(
+                    selectedOrder.shipment!.point!.name!,
+                    style: textStyle,
+                    top: 4,
+                  ),
+                  TextWithMargin(
+                    selectedOrder.shipment!.point!.address!,
+                    style: textStyle,
+                    top: 4,
+                  ),
+                  TextWithMargin(
+                    selectedOrder.shipment!.point!.description!,
+                    style: textStyle,
+                    top: 4,
+                  ),
                 ],
               ),
         const Text(
@@ -37,8 +76,14 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         selectedOrder.comments!.isNotEmpty
-            ? Text(selectedOrder.comments!)
-            : const Text("brak komentarza"),
+            ? Text(
+                selectedOrder.comments!,
+                style: textStyle,
+              )
+            : Text(
+                "brak komentarza",
+                style: textStyle,
+              ),
       ],
     );
   }

@@ -30,6 +30,10 @@ class DefaultTheme {
                 fontFamily: 'Roboto',
                 fontWeight: FontWeight.bold,
                 fontSize: 12),
+            headlineSmall: const TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 16,
+            ),
           ),
     );
   }
