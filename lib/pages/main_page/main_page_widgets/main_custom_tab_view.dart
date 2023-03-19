@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 import '../../orders_page/orders_page.dart';
 
 class MainCustomTabView extends StatefulWidget {

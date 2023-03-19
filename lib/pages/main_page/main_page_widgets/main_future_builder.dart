@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:testapp/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
-import 'package:testapp/web_api/connections/orders_connection.dart';
-import 'package:testapp/web_api/dto/order_list_dto.dart';
+import 'package:orderskatya/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
+import 'package:orderskatya/web_api/connections/orders_connection.dart';
+import 'package:orderskatya/web_api/dto/order_list_dto.dart';
 
 import 'main_cupertino_tab_bar.dart';
 

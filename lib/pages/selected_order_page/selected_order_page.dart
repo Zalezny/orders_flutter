@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
-import 'package:testapp/custom_widgets/custom_checkbox_list_tile.dart';
-import 'package:testapp/pages/selected_order_page/selected_order_page_widgets/selected_order_floating_action_button.dart';
-import 'package:testapp/web_api/connections/orders_connection.dart';
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/custom_widgets/custom_checkbox_list_tile.dart';
+import 'package:orderskatya/pages/selected_order_page/selected_order_page_widgets/selected_order_floating_action_button.dart';
+import 'package:orderskatya/web_api/connections/orders_connection.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 import 'selected_order_page_widgets/selected_order_cart.dart';
 import 'selected_order_page_widgets/selected_order_personal_info.dart';
 

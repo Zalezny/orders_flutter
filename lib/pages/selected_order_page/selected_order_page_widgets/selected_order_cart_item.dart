@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/web_api/dto/order.dart';
+import 'package:orderskatya/web_api/dto/order.dart';
 
 class SelectedOrderCartItem extends StatelessWidget {
   final Order itemCart;

@@ -1,4 +1,4 @@
-import 'package:testapp/web_api/dto/payment.dart';
+import 'package:orderskatya/web_api/dto/payment.dart';
 
 import 'order.dart';
 import 'shipment.dart';

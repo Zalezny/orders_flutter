@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/pages/orders_page/orders_page_widgets/orders_list_item.dart';
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/pages/orders_page/orders_page_widgets/orders_list_item.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 
 class OrdersPage extends StatefulWidget {
   final bool isSend;

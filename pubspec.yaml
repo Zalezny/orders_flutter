@@ -1,5 +1,5 @@
-name: testapp
-description: A new Flutter project.
+name: orderskatya
+description: Flutter project for Katya Company.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -39,6 +39,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.5
   fluttertoast: ^8.2.1
+  firebase_core: ^2.8.0
 
 dev_dependencies:
   flutter_test:

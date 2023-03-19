@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:testapp/pages/selected_order_page/selected_order_page.dart';
-import 'package:testapp/web_api/connections/orders_connection.dart';
+import 'package:orderskatya/pages/selected_order_page/selected_order_page.dart';
+import 'package:orderskatya/web_api/connections/orders_connection.dart';
 import 'dart:developer' as developer;
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 
 class OrdersItem extends StatelessWidget {
   final Orders orderItem;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:testapp/custom_widgets/text_with_margin.dart';
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/custom_widgets/text_with_margin.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 
 class SelectedOrderPersonalInfo extends StatelessWidget {
   final Orders selectedOrder;

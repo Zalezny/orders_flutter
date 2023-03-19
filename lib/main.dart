@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:testapp/di/dependency_injection.dart';
-import 'package:testapp/pages/main_page/main_page.dart';
-import 'package:testapp/themes/default_theme.dart';
+import 'package:orderskatya/di/dependency_injection.dart';
+import 'package:orderskatya/pages/main_page/main_page.dart';
+import 'package:orderskatya/themes/default_theme.dart';
 
 void main() {
   runApp(MyApp());
