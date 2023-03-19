@@ -24,28 +24,43 @@ class OrdersItem extends StatelessWidget {
                       selectedOrder: orderItem,
                       swipeArchive: swipeArchiveOrder,
                     ))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Text(
-              "Zamówienie nr ${orderItem.orderNumber}",
-              style: const TextStyle(fontFamily: 'Roboto', fontSize: 24),
-            ),
-            Text(
-              "${orderItem.name} ${orderItem.lastName}",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            const Divider(
-              color: Colors.black,
-            )
-          ],
+        child: IntrinsicHeight(
+          child: Stack(
+            alignment: Alignment.centerRight,
+            children: [
+              const SizedBox(
+                  height: double.infinity,
+                  child: Padding(
+                      padding: EdgeInsets.only(bottom: 25),
+                      child: Icon(
+                        Icons.priority_high,
+                        color: Colors.blueAccent,
+                      ))),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Zamówienie nr ${orderItem.orderNumber}",
+                    style: const TextStyle(fontFamily: 'Roboto', fontSize: 24),
+                  ),
+                  Text(
+                    "${orderItem.name} ${orderItem.lastName}",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  const Divider(
+                    color: Colors.black,
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
