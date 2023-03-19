@@ -33,7 +33,7 @@ class OrdersItem extends StatelessWidget {
             ),
             Text(
               "Zamówienie nr ${orderItem.orderNumber}",
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: TextStyle(fontFamily: 'Roboto', fontSize: 24),
             ),
             Text(
               "${orderItem.name} ${orderItem.lastName}",
