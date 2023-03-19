@@ -38,4 +38,21 @@ class OrdersConnection {
       onSuccess.call();
     }
   }
+
+  Future<void> patchStatus(
+      {required bool status,
+      required String id,
+      required VoidCallback onSuccess}) async {
+    final Map<String, String> body = {
+      'status': status.toString(),
+    };
+    final link = ConstDatabase.dynamicPaymentUrl(id);
+    final Response response = await apiService.patch(link, body);
+
+    if (response.statusCode == 404) {
+      throw Exception('Failed to patch, StatusCode: ${response.statusCode}');
+    } else {
+      onSuccess.call();
+    }
+  }
 }

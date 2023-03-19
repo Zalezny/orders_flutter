@@ -1,3 +1,5 @@
+import 'package:testapp/web_api/dto/payment.dart';
+
 import 'order.dart';
 import 'shipment.dart';
 
@@ -18,6 +20,8 @@ class Orders {
   bool? newOrder;
   String? date;
   int? iV;
+  bool? status;
+  Payment? payment;
 
   Orders(
       {this.sId,
@@ -35,7 +39,9 @@ class Orders {
       this.archive,
       this.newOrder,
       this.date,
-      this.iV});
+      this.iV,
+      this.status,
+      this.payment});
 
   Orders.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -60,5 +66,9 @@ class Orders {
     newOrder = json['newOrder'];
     date = json['date'];
     iV = json['__v'];
+    status = json['status'];
+    payment = json['payment'] != null ? Payment.fromJson(json['payment']) : null;
   }
 }
+
+
