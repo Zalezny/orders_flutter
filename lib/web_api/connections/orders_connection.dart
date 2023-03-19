@@ -55,4 +55,21 @@ class OrdersConnection {
       onSuccess.call();
     }
   }
+
+  Future<void> patchNew(
+      {required bool isNew,
+      required String id,
+      required VoidCallback onSuccess}) async {
+    final Map<String, String> body = {
+      'newOrder': isNew.toString(),
+    };
+    final link = ConstDatabase.dynamicOrderUrl(id);
+    final Response response = await apiService.patch(link, body);
+
+    if (response.statusCode == 404) {
+      throw Exception('Failed to patch, StatusCode: ${response.statusCode}');
+    } else {
+      onSuccess.call();
+    }
+  }
 }

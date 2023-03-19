@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:testapp/pages/selected_order_page/selected_order_page.dart';
+import 'package:testapp/web_api/connections/orders_connection.dart';
+import 'dart:developer' as developer;
 import 'package:testapp/web_api/dto/orders.dart';
 
 class OrdersItem extends StatelessWidget {
   final Orders orderItem;
+  final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
   final Function swipeArchiveOrder;
-  const OrdersItem({
+  OrdersItem({
     super.key,
     required this.orderItem,
     required this.swipeArchiveOrder,
@@ -17,25 +21,36 @@ class OrdersItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
-        onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => SelectedOrderPage(
-                      selectedOrder: orderItem,
-                      swipeArchive: swipeArchiveOrder,
-                    ))),
+        onTap: () {
+          orderItem.newOrder!
+              ? ordersConnection.patchNew(
+                  isNew: false,
+                  id: orderItem.sId!,
+                  onSuccess: () =>
+                      developer.log("Now order ${orderItem.sId} newOrder is false"),)
+              : null;
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SelectedOrderPage(
+                        selectedOrder: orderItem,
+                        swipeArchive: swipeArchiveOrder,
+                      )));
+        },
         child: IntrinsicHeight(
           child: Stack(
             alignment: Alignment.centerRight,
             children: [
-              const SizedBox(
-                  height: double.infinity,
-                  child: Padding(
-                      padding: EdgeInsets.only(bottom: 25),
-                      child: Icon(
-                        Icons.priority_high,
-                        color: Colors.blueAccent,
-                      ))),
+              orderItem.newOrder!
+                  ? const SizedBox(
+                      height: double.infinity,
+                      child: Padding(
+                          padding: EdgeInsets.only(bottom: 25),
+                          child: Icon(
+                            Icons.priority_high,
+                            color: Colors.blueAccent,
+                          )))
+                  : const SizedBox(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
