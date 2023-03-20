@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:testapp/pages/main_page/main_page_widgets/main_future_builder.dart';
+import 'package:orderskatya/pages/main_page/main_page_widgets/main_future_builder.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

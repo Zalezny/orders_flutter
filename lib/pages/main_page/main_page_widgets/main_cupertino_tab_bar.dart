@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:testapp/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
-import 'package:testapp/web_api/dto/orders.dart';
+import 'package:orderskatya/pages/main_page/main_page_widgets/main_custom_tab_view.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 
 class MainCupertinoTabBar extends StatelessWidget {
   final List<Orders> ordersList;
