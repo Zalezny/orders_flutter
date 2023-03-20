@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orderskatya/di/dependency_injection.dart';
+import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
@@ -17,23 +18,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessaging.instance
-      .getToken()
-      .then((value) => print("Token is: $value"));
-
-  FirebaseMessaging.onMessage.listen(
-    (RemoteMessage event) {
-      print(event);
-      print(event.notification!.body);
-    },
-  );
-  FirebaseMessaging.onMessageOpenedApp.listen(
-    (RemoteMessage message) {
-      print(message);
-    },
-  );
-
-  FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
+  FirebaseMessagingService.initalization(backgroundMessageHandler);
 
   runApp(MyApp());
 }
