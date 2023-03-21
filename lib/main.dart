@@ -12,7 +12,7 @@ import 'package:orderskatya/themes/default_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-Future<void> backgroundMessageHandler(RemoteMessage message) async {}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupDependencyInjection();
@@ -20,15 +20,19 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseMessagingService.initalization(backgroundMessageHandler);
+  FirebaseMessagingService.initalization();
 
-  runApp(MyApp());
+  final RemoteMessage? _terminatedMessage = await FirebaseMessaging.instance.getInitialMessage();
+
+  if(_terminatedMessage != null) {
+    print("TEST");
+  }
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}) {
-    
-  }
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override

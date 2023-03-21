@@ -8,9 +8,11 @@ import 'package:orderskatya/web_api/dto/orders.dart';
 
 import 'local_notification_service.dart';
 
+Future<void> backgroundMessageHandler(RemoteMessage message) async {
+  //THIS WORK FOR BACKGROUND MESSAGE RECEIVED (NOT CLICK)
+}
 class FirebaseMessagingService {
-  static void initalization(
-      Future<void> Function(RemoteMessage) handler) async {
+  static void initalization() async {
     final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
 
     FirebaseMessaging.instance.subscribeToTopic("fcm");
@@ -38,6 +40,6 @@ class FirebaseMessagingService {
       },
     );
 
-    FirebaseMessaging.onBackgroundMessage(handler);
+    FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
   }
 }
