@@ -13,7 +13,7 @@ class LocalNotificationsService {
     const InitializationSettings initializationSettings =
          InitializationSettings(
       android: AndroidInitializationSettings(
-        '@mipmap/ic_launcher',
+        'ic_logo',
       ),
     );
 
@@ -36,6 +36,8 @@ class LocalNotificationsService {
       '100',
       importance: Importance.max,
       priority: Priority.high,
+      color: Color(0xFFe94168)
+      
     ));
     
 
