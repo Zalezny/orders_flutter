@@ -42,6 +42,15 @@ dependencies:
   firebase_core: ^2.8.0
   firebase_messaging: ^14.3.0
   flutter_local_notifications: ^13.0.0
+  flutter_launcher_icons: ^0.12.0
+
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icon/ic_launcher.png"
+  adaptive_icon_background: "assets/images/white_theme.png"
+  adaptive_icon_foreground: "assets/icon/ic_launcher_foreground.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 dev_dependencies:
   flutter_test:
