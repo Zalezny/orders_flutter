@@ -1,9 +1,11 @@
 import 'dart:convert';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get_it/get_it.dart';
+import 'package:orderskatya/services/navigation_service.dart';
+import 'package:orderskatya/web_api/connections/orders_connection.dart';
 
 class LocalNotificationsService {
   static final FlutterLocalNotificationsPlugin notificationPlugin =
@@ -25,8 +27,16 @@ class LocalNotificationsService {
   }
 
   static Future<void> notificationResponse(msg) async {
-    var decodedMsg = json.decode(msg.payload!);
-    print("decoded Message: $decodedMsg");
+    final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
+    final Map<String,dynamic> decodedMsg = await json.decode(msg.payload!);
+    print("Decoded Msg $decodedMsg");
+    if (decodedMsg.isNotEmpty) {
+          final String newOrderId = decodedMsg['body'];
+          ordersConnection.getOrderById(newOrderId).then(
+                (order) =>
+                    NavigationService.navigateToSelectedOrder(order, () {}),
+              );
+        }
   }
 
   static void showNotification(RemoteMessage message) {

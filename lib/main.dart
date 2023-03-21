@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:orderskatya/di/dependency_injection.dart';
 import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page.dart';
+import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -14,6 +15,7 @@ import 'firebase_options.dart';
 Future<void> backgroundMessageHandler(RemoteMessage message) async {}
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  setupDependencyInjection();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -25,7 +27,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({super.key}) {
-    setupDependencyInjection();
+    
   }
 
   // This widget is the root of your application.
@@ -33,6 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? CupertinoApp(
+          navigatorKey: NavigationService.navigatorKey,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
               DefaultMaterialLocalizations.delegate,
@@ -45,6 +48,7 @@ class MyApp extends StatelessWidget {
           )
         : MaterialApp(
             title: 'KatyaOrders',
+            navigatorKey: NavigationService.navigatorKey,
             theme: DefaultTheme().buildThemeData(),
             home: MainPage(),
           );

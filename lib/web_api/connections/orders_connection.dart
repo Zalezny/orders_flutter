@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:orderskatya/web_api/const_database.dart';
 import 'package:orderskatya/web_api/dto/order_list_dto.dart';
+import 'package:orderskatya/web_api/dto/orders.dart';
 import 'package:orderskatya/web_api/services/api_service.dart';
 
 class OrdersConnection {
@@ -19,6 +20,19 @@ class OrdersConnection {
       final body = json.decode(response.body);
       var orders = OrderListDto.fromJson(body);
       return orders;
+    }
+  }
+
+  Future<Orders> getOrderById(String id) async {
+    final String clearId = id.replaceAll(RegExp(r'"'), '');
+    final Response response = await apiService.get(ConstDatabase.dynamicOrderUrl(clearId));
+
+    if (response.statusCode == 404) {
+      throw Exception('Failed load');
+    } else {
+      final body = json.decode(response.body);
+      print("Body is $body");
+      return Orders.fromJson(body);
     }
   }
 
