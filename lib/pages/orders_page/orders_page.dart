@@ -25,6 +25,17 @@ class _OrdersPageState extends State<OrdersPage> {
     });
   }
 
+  void _removeIsNew(String id) {
+    setState(() {
+      final index =
+          widget.reversedOrdersList.indexWhere((element) => element.sId == id);
+      var obj = widget.reversedOrdersList[index];
+      obj.newOrder = false;
+      widget.reversedOrdersList.removeAt(index);
+      widget.reversedOrdersList.insert(index, obj);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -35,6 +46,7 @@ class _OrdersPageState extends State<OrdersPage> {
           return OrdersItem(
             orderItem: currItem,
             swipeArchiveOrder: swipeArchiveOrder,
+            removeNewOrder: _removeIsNew
           );
         }
         return const SizedBox(height: 0);

@@ -9,10 +9,12 @@ class OrdersItem extends StatelessWidget {
   final Orders orderItem;
   final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
   final Function swipeArchiveOrder;
+  final Function removeNewOrder;
   OrdersItem({
     super.key,
     required this.orderItem,
     required this.swipeArchiveOrder,
+    required this.removeNewOrder
   });
 
   @override
@@ -27,7 +29,9 @@ class OrdersItem extends StatelessWidget {
                   isNew: false,
                   id: orderItem.sId!,
                   onSuccess: () =>
-                      developer.log("Now order ${orderItem.sId} newOrder is false"),)
+                      developer.log("Now order ${orderItem.sId} newOrder is false"),).then((_){
+                        removeNewOrder(orderItem.sId);
+                      })
               : null;
           Navigator.push(
               context,
