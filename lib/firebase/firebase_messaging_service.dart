@@ -12,11 +12,14 @@ Future<void> backgroundMessageHandler(RemoteMessage message) async {
   //THIS WORK FOR BACKGROUND MESSAGE RECEIVED (NOT CLICK)
 }
 class FirebaseMessagingService {
+  static FirebaseMessaging? firebaseMessaging;
+
   static void initalization() async {
+    firebaseMessaging = FirebaseMessaging.instance;
     final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
 
-    FirebaseMessaging.instance.subscribeToTopic("fcm");
-    await FirebaseMessaging.instance
+    firebaseMessaging!.subscribeToTopic("fcm");
+    await firebaseMessaging!
         .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,

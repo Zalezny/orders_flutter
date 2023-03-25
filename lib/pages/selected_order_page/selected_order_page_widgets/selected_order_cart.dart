@@ -24,6 +24,7 @@ class SelectedOrderCart extends StatelessWidget {
       child: Column(
         children: [
           ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (ctx, index) =>
                 SelectedOrderCartItem(itemCart: cart[index]),
             itemCount: cart.length,

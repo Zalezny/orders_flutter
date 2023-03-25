@@ -109,7 +109,10 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                     )
                   : const SizedBox(),
               SelectedOrderCart(selectedOrder: simpleOrder),
-              SelectedOrderPersonalInfo(selectedOrder: simpleOrder)
+              SelectedOrderPersonalInfo(selectedOrder: simpleOrder),
+              const SizedBox(
+                height: 60,
+              ),
             ],
           ),
         ),

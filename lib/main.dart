@@ -22,10 +22,13 @@ Future<void> main() async {
   );
   FirebaseMessagingService.initalization();
 
-  final RemoteMessage? _terminatedMessage = await FirebaseMessaging.instance.getInitialMessage();
+  final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
 
-  if(_terminatedMessage != null) {
-    print("TEST");
+  if(terminatedMessage != null) {
+     if (terminatedMessage.data.isNotEmpty) {
+          final String newOrderId = terminatedMessage.data['body'];
+          NavigationService.navigateToSelectedOrderById(newOrderId);
+        }
   }
 
   runApp(const MyApp());
