@@ -1,3 +1,4 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -13,6 +14,26 @@ Future<void> backgroundMessageHandler(RemoteMessage message) async {
 }
 class FirebaseMessagingService {
   static FirebaseMessaging? firebaseMessaging;
+
+  static void requestNotificationPermission() async {
+    NotificationSettings? settings = firebaseMessaging != null ? await firebaseMessaging!.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true
+    ) : null;
+    if(settings?.authorizationStatus == AuthorizationStatus.authorized) {
+      print('user granted permission');
+    } else if(settings?.authorizationStatus == AuthorizationStatus.provisional) {
+      print('user granted provisional permission');
+    } else {
+      AppSettings.openNotificationSettings();
+      print('user denied permission');
+    }
+  }
 
   static void initalization() async {
     firebaseMessaging = FirebaseMessaging.instance;

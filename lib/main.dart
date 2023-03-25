@@ -12,7 +12,6 @@ import 'package:orderskatya/themes/default_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupDependencyInjection();
@@ -22,27 +21,39 @@ Future<void> main() async {
   );
   FirebaseMessagingService.initalization();
 
-  final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
+  final RemoteMessage? terminatedMessage =
+      await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
 
-  if(terminatedMessage != null) {
-     if (terminatedMessage.data.isNotEmpty) {
-          final String newOrderId = terminatedMessage.data['body'];
-          NavigationService.navigateToSelectedOrderById(newOrderId);
-        }
+  if (terminatedMessage != null) {
+    if (terminatedMessage.data.isNotEmpty) {
+      final String newOrderId = terminatedMessage.data['body'];
+      NavigationService.navigateToSelectedOrderById(newOrderId);
+    }
   }
 
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessagingService.requestNotificationPermission();
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? CupertinoApp(
-          navigatorKey: NavigationService.navigatorKey,
+            navigatorKey: NavigationService.navigatorKey,
             debugShowCheckedModeBanner: false,
             localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
               DefaultMaterialLocalizations.delegate,
