@@ -31,7 +31,7 @@ class OrdersConnection {
       throw Exception('Failed load');
     } else {
       final body = json.decode(response.body);
-      print("Body is $body");
+
       return Orders.fromJson(body);
     }
   }

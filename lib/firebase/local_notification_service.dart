@@ -29,7 +29,7 @@ class LocalNotificationsService {
   static Future<void> notificationResponse(msg) async {
     final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
     final Map<String,dynamic> decodedMsg = await json.decode(msg.payload!);
-    print("Decoded Msg $decodedMsg");
+
     if (decodedMsg.isNotEmpty) {
           final String newOrderId = decodedMsg['body'];
           ordersConnection.getOrderById(newOrderId).then(
