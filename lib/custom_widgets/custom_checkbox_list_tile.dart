@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class CustomCheckboxListTile extends StatefulWidget {
-  bool? initValue = false;
-  Text? text;
-  Function(bool?) onChanged;
+  final bool? initValue;
+  final Text? text;
+  final Function(bool?) onChanged;
 
-  CustomCheckboxListTile(
+  const CustomCheckboxListTile(
       {super.key, this.initValue, this.text, required this.onChanged});
 
   @override

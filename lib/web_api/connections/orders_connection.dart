@@ -40,6 +40,7 @@ class OrdersConnection {
       {required bool isArchive,
       required String id,
       required VoidCallback onSuccess}) async {
+        print("patchIsArchive");
     final Map<String, String> body = {
       'archive': isArchive.toString(),
     };
@@ -57,6 +58,8 @@ class OrdersConnection {
       {required bool status,
       required String id,
       required VoidCallback onSuccess}) async {
+        print("patchStatus");
+
     final Map<String, String> body = {
       'status': status.toString(),
     };

@@ -26,13 +26,6 @@ class SelectedOrderPage extends StatefulWidget {
 
 class _SelectedOrderPageState extends State<SelectedOrderPage> {
   final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
-  bool _isPayment = false;
-
-  @override
-  void initState() {
-    _isPayment = widget.selectedOrder.status ?? false;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

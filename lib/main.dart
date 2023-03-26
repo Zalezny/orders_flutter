@@ -10,10 +10,7 @@ import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:orderskatya/web_api/dto/order.dart';
-import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'web_api/dto/orders.dart';
 
 Future<void> main() async {
   String newOrderId = "";

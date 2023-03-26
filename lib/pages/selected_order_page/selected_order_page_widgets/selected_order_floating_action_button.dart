@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orderskatya/web_api/connections/orders_connection.dart';
 

@@ -6,8 +6,6 @@ import 'package:get_it/get_it.dart';
 import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page_widgets/main_future_builder.dart';
 import 'package:orderskatya/web_api/connections/orders_connection.dart';
-import 'package:provider/provider.dart';
-
 import '../../services/navigation_service.dart';
 
 class MainPage extends StatefulWidget {

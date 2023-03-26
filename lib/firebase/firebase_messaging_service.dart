@@ -1,11 +1,10 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:orderskatya/pages/selected_order_page/selected_order_page.dart';
+import 'package:logger/logger.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/web_api/connections/orders_connection.dart';
-import 'package:orderskatya/web_api/dto/orders.dart';
+
 
 import 'local_notification_service.dart';
 
@@ -17,6 +16,7 @@ class FirebaseMessagingService {
   static FirebaseMessaging? firebaseMessaging;
 
   static void requestNotificationPermission() async {
+    final Logger logger = Logger();
     NotificationSettings? settings = firebaseMessaging != null ? await firebaseMessaging!.requestPermission(
       alert: true,
       announcement: true,
@@ -27,12 +27,12 @@ class FirebaseMessagingService {
       sound: true
     ) : null;
     if(settings?.authorizationStatus == AuthorizationStatus.authorized) {
-      print('user granted permission');
+      logger.d('user granted notification permission');
     } else if(settings?.authorizationStatus == AuthorizationStatus.provisional) {
-      print('user granted provisional permission');
+      logger.d('user granted notification provisional permission');
     } else {
       AppSettings.openNotificationSettings();
-      print('user denied permission');
+      logger.d('user denied notification permission');
     }
   }
 

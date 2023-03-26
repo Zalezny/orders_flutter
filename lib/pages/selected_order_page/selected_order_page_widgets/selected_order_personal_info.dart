@@ -14,7 +14,7 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
       children: [
         TextWithMargin(
           "Dane do wysyłki: ",
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           top: 4,
         ),
         TextWithMargin(
