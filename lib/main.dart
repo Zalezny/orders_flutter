@@ -6,19 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:orderskatya/di/dependency_injection.dart';
 import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page.dart';
+import 'package:orderskatya/providers/terminated_message_provider.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:orderskatya/web_api/dto/order.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'web_api/dto/orders.dart';
+
 
 Future<void> main() async {
+  String newOrderId = "";
   WidgetsFlutterBinding.ensureInitialized();
-  setupDependencyInjection();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  setupDependencyInjection();
+
   FirebaseMessagingService.initalization();
 
   final RemoteMessage? terminatedMessage =
@@ -26,28 +34,37 @@ Future<void> main() async {
 
   if (terminatedMessage != null) {
     if (terminatedMessage.data.isNotEmpty) {
-      final String newOrderId = terminatedMessage.data['body'];
-      NavigationService.navigateToSelectedOrderById(newOrderId);
+      newOrderId = terminatedMessage.data['body'];
     }
   }
+  FirebaseMessagingService.terminatedId = newOrderId;
 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TerminatedMessageProvider())
+      ],
+      child: MyApp(starterId: newOrderId),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final String starterId;
+  const MyApp({super.key, required this.starterId});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
     FirebaseMessagingService.requestNotificationPermission();
+    // Provider.of<TerminatedMessageProvider>(context).setOrderId(widget.starterId);
   }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -60,15 +77,15 @@ class _MyAppState extends State<MyApp> {
               DefaultWidgetsLocalizations.delegate,
               DefaultCupertinoLocalizations.delegate,
             ],
-            title: 'Flutter Demo',
+            title: 'Order Katya',
             theme: DefaultTheme().buildCupertinoThemeData(),
-            home: MainPage(),
+            home: const MainPage(),
           )
         : MaterialApp(
-            title: 'KatyaOrders',
+            title: "Order Katya",
             navigatorKey: NavigationService.navigatorKey,
             theme: DefaultTheme().buildThemeData(),
-            home: MainPage(),
+            home: const MainPage(),
           );
   }
 }

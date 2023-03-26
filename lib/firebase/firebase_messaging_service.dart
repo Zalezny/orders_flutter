@@ -13,6 +13,7 @@ Future<void> backgroundMessageHandler(RemoteMessage message) async {
   //THIS WORK FOR BACKGROUND MESSAGE RECEIVED (NOT CLICK)
 }
 class FirebaseMessagingService {
+  static String terminatedId = "";
   static FirebaseMessaging? firebaseMessaging;
 
   static void requestNotificationPermission() async {

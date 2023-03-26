@@ -2,7 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page_widgets/main_future_builder.dart';
+import 'package:orderskatya/web_api/connections/orders_connection.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/terminated_message_provider.dart';
+import '../../services/navigation_service.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,6 +21,13 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
+    
+    if(FirebaseMessagingService.terminatedId.isNotEmpty) {
+
+      final ordersConnection = GetIt.I<OrdersConnection>();
+      ordersConnection.getOrderById(FirebaseMessagingService.terminatedId).then((value) => NavigationService.navigateToSelectedOrder(value, () {}));
+      
+    }
     return Platform.isIOS
         ? const CupertinoPageScaffold(
             child: MainFutureBuilder(),

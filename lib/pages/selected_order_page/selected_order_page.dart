@@ -11,18 +11,12 @@ import 'selected_order_page_widgets/selected_order_cart.dart';
 import 'selected_order_page_widgets/selected_order_personal_info.dart';
 
 class SelectedOrderPage extends StatefulWidget {
-  Orders? selectedOrder;
-  Function swipeArchive;
-  String? id;
+  final Orders selectedOrder;
+  final Function swipeArchive;
 
-  SelectedOrderPage({
+  const SelectedOrderPage({
     super.key,
     required this.selectedOrder,
-    required this.swipeArchive,
-  });
-  SelectedOrderPage.fromId({
-    super.key,
-    required this.id,
     required this.swipeArchive,
   });
 
@@ -32,24 +26,18 @@ class SelectedOrderPage extends StatefulWidget {
 
 class _SelectedOrderPageState extends State<SelectedOrderPage> {
   final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
-  late final Orders simpleOrder;
   bool _isPayment = false;
+
   @override
   void initState() {
-    if (widget.id != null) {
-      ordersConnection
-          .getOrderById(widget.id!)
-          .then((order) => simpleOrder = order);
-    } else {
-      simpleOrder = widget.selectedOrder!;
-    }
-    _isPayment = simpleOrder.status ?? false;
+    _isPayment = widget.selectedOrder.status ?? false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final orderId = simpleOrder.sId!;
+    final Orders simpleOrder = widget.selectedOrder;
+    final String orderId = simpleOrder.sId!;
 
     final dynamic appBar = Platform.isIOS
         ? CupertinoNavigationBar(

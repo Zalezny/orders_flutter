@@ -12,9 +12,4 @@ class NavigationService {
       ),
     ));
   }
-  static Future<void> navigateToSelectedOrderById(String id) async {
-    navigatorKey.currentState!.push(MaterialPageRoute(
-      builder: (context) => SelectedOrderPage.fromId(id: id.replaceAll(r'"', ''), swipeArchive: () {},),
-    ));
-  }
 }
