@@ -2,6 +2,8 @@
 
 A Flutter project similar to OrdersKatya-P- project. It configured to iOS and Android
 
+EDIT: iOS not supported yet. Unfortunately you cannot debug this app because is missing firebase and api config (for security).
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
