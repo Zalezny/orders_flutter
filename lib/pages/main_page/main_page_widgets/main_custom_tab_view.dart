@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orderskatya/providers/terminated_message_provider.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/web_api/dto/orders.dart';
 import 'package:provider/provider.dart';

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:orderskatya/di/dependency_injection.dart';
 import 'package:orderskatya/firebase/firebase_messaging_service.dart';
 import 'package:orderskatya/pages/main_page/main_page.dart';
-import 'package:orderskatya/providers/terminated_message_provider.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
@@ -15,7 +14,6 @@ import 'package:orderskatya/web_api/dto/order.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'web_api/dto/orders.dart';
-
 
 Future<void> main() async {
   String newOrderId = "";
@@ -39,14 +37,7 @@ Future<void> main() async {
   }
   FirebaseMessagingService.terminatedId = newOrderId;
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => TerminatedMessageProvider())
-      ],
-      child: MyApp(starterId: newOrderId),
-    ),
-  );
+  runApp(MyApp(starterId: newOrderId));
 }
 
 class MyApp extends StatefulWidget {
