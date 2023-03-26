@@ -1,6 +1,6 @@
 # OrdersFlutter
 
-A Flutter project similar to OrdersKatya-P- project. It configured to iOS and Android
+A Flutter project similar to [OrdersKatyaPublic](https://github.com/Zalezny/OrderKatyaPublic) project. Some screens are configured to iOS but it is still in work.
 
 EDIT: iOS not supported yet. Unfortunately you cannot debug this app because is missing firebase and api config (for security).
 
