@@ -44,6 +44,7 @@ class _OrdersPageState extends State<OrdersPage> {
 
         if (currItem.archive == widget.isSend) {
           return OrdersItem(
+            key: ValueKey(currItem.sId),
             orderItem: currItem,
             swipeArchiveOrder: swipeArchiveOrder,
             removeNewOrder: _removeIsNew
