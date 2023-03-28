@@ -14,7 +14,7 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
-  void swipeArchiveOrder(String id, bool archiveBool) {
+  void changeListViewForOrder(String id, bool archiveBool) {
     final index =
         widget.reversedOrdersList.indexWhere((element) => element.sId == id);
     var obj = widget.reversedOrdersList[index];
@@ -46,7 +46,7 @@ class _OrdersPageState extends State<OrdersPage> {
           return OrdersItem(
             key: ValueKey(currItem.sId),
             orderItem: currItem,
-            swipeArchiveOrder: swipeArchiveOrder,
+            swipeArchiveOrder: changeListViewForOrder,
             removeNewOrder: _removeIsNew
           );
         }
