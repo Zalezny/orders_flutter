@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class TextWithMargin extends StatelessWidget {
   final String text;
-  double? top = 0;
-  double? bottom = 0;
-  double? left = 0;
-  double? right = 0;
-  TextStyle? style;
-  TextWithMargin(
+  final double? top;
+  final double? bottom;
+  final double? left;
+  final double? right;
+  final TextStyle? style;
+  const TextWithMargin(
     this.text, {
     super.key,
     this.top,

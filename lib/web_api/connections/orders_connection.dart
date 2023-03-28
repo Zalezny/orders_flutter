@@ -12,12 +12,14 @@ class OrdersConnection {
   final apiService = GetIt.I<ApiService>();
 
   Future<OrderListDto> getOrders() async {
+    print(ConstDatabase.ordersUrl);
     final Response response = await apiService.get(ConstDatabase.ordersUrl);
 
     if (response.statusCode == 404) {
       throw Exception('Failed load');
     } else {
       final body = json.decode(response.body);
+      print(body);
       var orders = OrderListDto.fromJson(body);
       return orders;
     }
@@ -40,7 +42,6 @@ class OrdersConnection {
       {required bool isArchive,
       required String id,
       required VoidCallback onSuccess}) async {
-        print("patchIsArchive");
     final Map<String, String> body = {
       'archive': isArchive.toString(),
     };
@@ -58,7 +59,6 @@ class OrdersConnection {
       {required bool status,
       required String id,
       required VoidCallback onSuccess}) async {
-        print("patchStatus");
 
     final Map<String, String> body = {
       'status': status.toString(),

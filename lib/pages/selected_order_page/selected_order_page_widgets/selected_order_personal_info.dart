@@ -12,7 +12,7 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextWithMargin(
+        const TextWithMargin(
           "Dane do wysyłki: ",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           top: 4,

@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/web_api/connections/orders_connection.dart';
+import 'package:orderskatya/web_api/const_database.dart';
 
 
 import 'local_notification_service.dart';
@@ -40,7 +41,7 @@ class FirebaseMessagingService {
     firebaseMessaging = FirebaseMessaging.instance;
     final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
 
-    firebaseMessaging!.subscribeToTopic("fcm");
+    firebaseMessaging!.subscribeToTopic(ConstDatabase.topic);
     await firebaseMessaging!
         .setForegroundNotificationPresentationOptions(
       alert: true,
