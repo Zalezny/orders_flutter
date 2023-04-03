@@ -4,6 +4,13 @@ A Flutter project similar to [OrdersKatyaPublic](https://github.com/Zalezny/Orde
 
 EDIT: iOS not supported yet. Unfortunately you cannot debug this app because is missing firebase and api config (for security).
 
+Use:
+
+- Material Design
+- Cupertino Design
+- REST API
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
