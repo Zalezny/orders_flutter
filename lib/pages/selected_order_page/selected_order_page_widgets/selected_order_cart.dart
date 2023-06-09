@@ -10,7 +10,7 @@ class SelectedOrderCart extends StatelessWidget {
   int addAllPrices() {
     int sum = 0;
     for (int i = 0; i < selectedOrder.order.length; i++) {
-      sum += selectedOrder.order[i].price!;
+      sum += selectedOrder.order[i].price! * selectedOrder.order[i].quantity!;
     }
     sum += selectedOrder.shipment!.method!.price!;
     return sum;
@@ -25,8 +25,7 @@ class SelectedOrderCart extends StatelessWidget {
         children: [
           ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (ctx, index) =>
-                SelectedOrderCartItem(itemCart: cart[index]),
+            itemBuilder: (ctx, index) => SelectedOrderCartItem(itemCart: cart[index]),
             itemCount: cart.length,
             shrinkWrap: true,
           ),
