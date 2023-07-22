@@ -13,11 +13,11 @@ class LocalNotificationsService {
 
   static void initialize() {
     const InitializationSettings initializationSettings =
-         InitializationSettings(
-      android: AndroidInitializationSettings(
-        'ic_logo',
-      ),
-    );
+        InitializationSettings(
+            android: AndroidInitializationSettings(
+              'ic_logo',
+            ),
+            iOS: DarwinInitializationSettings());
 
     notificationPlugin.initialize(
       initializationSettings,
@@ -28,28 +28,22 @@ class LocalNotificationsService {
 
   static Future<void> notificationResponse(msg) async {
     final OrdersConnection ordersConnection = GetIt.I<OrdersConnection>();
-    final Map<String,dynamic> decodedMsg = await json.decode(msg.payload!);
+    final Map<String, dynamic> decodedMsg = await json.decode(msg.payload!);
 
     if (decodedMsg.isNotEmpty) {
-          final String newOrderId = decodedMsg['body'];
-          ordersConnection.getOrderById(newOrderId).then(
-                (order) =>
-                    NavigationService.navigateToSelectedOrder(order, () {}),
-              );
-        }
+      final String newOrderId = decodedMsg['body'];
+      ordersConnection.getOrderById(newOrderId).then(
+            (order) => NavigationService.navigateToSelectedOrder(order, () {}),
+          );
+    }
   }
 
   static void showNotification(RemoteMessage message) {
     const NotificationDetails notificationDetails = NotificationDetails(
-        android: AndroidNotificationDetails(
-      'net.katya.notification',
-      '100',
-      importance: Importance.max,
-      priority: Priority.high,
-      color: Color(0xFFe94168)
-      
-    ));
-    
+        android: AndroidNotificationDetails('net.katya.notification', '100',
+            importance: Importance.max,
+            priority: Priority.high,
+            color: Color(0xFFe94168)));
 
     notificationPlugin.show(
         DateTime.now().microsecond,

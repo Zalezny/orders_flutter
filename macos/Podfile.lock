@@ -1,18 +1,17 @@
 PODS:
-  - "app_settings (3.0.0+1)":
-    - Flutter
   - Firebase/CoreOnly (10.6.0):
     - FirebaseCore (= 10.6.0)
   - Firebase/Messaging (10.6.0):
     - Firebase/CoreOnly
     - FirebaseMessaging (~> 10.6.0)
   - firebase_core (2.8.0):
-    - Firebase/CoreOnly (= 10.6.0)
-    - Flutter
+    - Firebase/CoreOnly (~> 10.6.0)
+    - FlutterMacOS
   - firebase_messaging (14.3.0):
-    - Firebase/Messaging (= 10.6.0)
+    - Firebase/CoreOnly (~> 10.6.0)
+    - Firebase/Messaging (~> 10.6.0)
     - firebase_core
-    - Flutter
+    - FlutterMacOS
   - FirebaseCore (10.6.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
@@ -33,12 +32,9 @@ PODS:
     - GoogleUtilities/Reachability (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - Flutter (1.0.0)
   - flutter_local_notifications (0.0.1):
-    - Flutter
-  - fluttertoast (0.0.2):
-    - Flutter
-    - Toast
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
   - GoogleDataTransport (9.2.3):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -66,15 +62,12 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
-  - Toast (4.0.0)
 
 DEPENDENCIES:
-  - app_settings (from `.symlinks/plugins/app_settings/ios`)
-  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
-  - Flutter (from `Flutter`)
-  - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
-  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
+  - firebase_messaging (from `Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos`)
+  - flutter_local_notifications (from `Flutter/ephemeral/.symlinks/plugins/flutter_local_notifications/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
 
 SPEC REPOS:
   trunk:
@@ -87,40 +80,32 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
-    - Toast
 
 EXTERNAL SOURCES:
-  app_settings:
-    :path: ".symlinks/plugins/app_settings/ios"
   firebase_core:
-    :path: ".symlinks/plugins/firebase_core/ios"
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
   firebase_messaging:
-    :path: ".symlinks/plugins/firebase_messaging/ios"
-  Flutter:
-    :path: Flutter
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_messaging/macos
   flutter_local_notifications:
-    :path: ".symlinks/plugins/flutter_local_notifications/ios"
-  fluttertoast:
-    :path: ".symlinks/plugins/fluttertoast/ios"
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_local_notifications/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
 
 SPEC CHECKSUMS:
-  app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
   Firebase: f13680471b021937f2230ea8503c7809d8c29806
-  firebase_core: 58542d7399889ebdbb034baa72d081e54c5c814d
-  firebase_messaging: 01a8db2962f81ea190d08db767aba2e7e805e647
+  firebase_core: 7cad6afc6d420690c239021131b133b3920d092e
+  firebase_messaging: a91fe8e3a431f404fe045e080d89c3e0d5155af0
   FirebaseCore: fa80ad16a62d52f67274b5b88304c3a318bbf9a4
   FirebaseCoreInternal: 950500ad8a08963657f6d8c67b579740c06d6aa1
   FirebaseInstallations: 7b99ef103f013624444c614397038219c45f8e63
   FirebaseMessaging: fd93783258c53ae5cdb9b41bf0c51606a677f2d5
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
-  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
+  flutter_local_notifications: 3805ca215b2fb7f397d78b66db91f6a747af52e4
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   GoogleDataTransport: f0308f5905a745f94fb91fea9c6cbaf3831cb1bd
   GoogleUtilities: c63691989bf362ba0505507da00eeb326192e83e
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 542a9c7d9a0b78ac8dc6b785dd41c4bfaaaf6a68
+PODFILE CHECKSUM: b7d2c6e2370d0f7ada13f7ccc79713066a35a67c
 
 COCOAPODS: 1.11.3

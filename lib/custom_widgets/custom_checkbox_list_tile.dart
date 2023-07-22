@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCheckboxListTile extends StatefulWidget {
@@ -24,24 +27,34 @@ class _CustomCheckboxListTileState extends State<CustomCheckboxListTile> {
   @override
   Widget build(BuildContext context) {
     return Row(
-        children: [
-          Checkbox(
-              activeColor: Theme.of(context).colorScheme.primary,
-              value: _isChecked,
-              onChanged: (newValue) {
-                setState(() {
-                  _isChecked = newValue ?? false;
-                  widget.onChanged(newValue);
-                });
-              }),
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () => setState(() {
-              _isChecked = !_isChecked;
-            }),
-            child: widget.text ?? const SizedBox(),
-          )
-        ],
-      );
+      children: [
+        Platform.isIOS
+            ? CupertinoCheckbox(
+                activeColor: Theme.of(context).colorScheme.primary,
+                value: _isChecked,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isChecked = newValue ?? false;
+                    widget.onChanged(newValue);
+                  });
+                })
+            : Checkbox(
+                activeColor: Theme.of(context).colorScheme.primary,
+                value: _isChecked,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isChecked = newValue ?? false;
+                    widget.onChanged(newValue);
+                  });
+                }),
+        GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => setState(() {
+            _isChecked = !_isChecked;
+          }),
+          child: widget.text ?? const SizedBox(),
+        )
+      ],
+    );
   }
 }
