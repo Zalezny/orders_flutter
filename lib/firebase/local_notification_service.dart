@@ -12,12 +12,13 @@ class LocalNotificationsService {
       FlutterLocalNotificationsPlugin();
 
   static void initialize() {
-    const InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: AndroidInitializationSettings(
-              'ic_logo',
-            ),
-            iOS: DarwinInitializationSettings());
+    InitializationSettings initializationSettings = InitializationSettings(
+        android: const AndroidInitializationSettings(
+          'ic_logo',
+        ),
+        iOS: DarwinInitializationSettings(
+          onDidReceiveLocalNotification: (id, title, body, payload) {},
+        ));
 
     notificationPlugin.initialize(
       initializationSettings,
