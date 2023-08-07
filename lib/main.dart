@@ -57,17 +57,20 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
-        ? CupertinoApp(
-            navigatorKey: NavigationService.navigatorKey,
-            debugShowCheckedModeBanner: false,
-            localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
-              DefaultMaterialLocalizations.delegate,
-              DefaultWidgetsLocalizations.delegate,
-              DefaultCupertinoLocalizations.delegate,
-            ],
-            title: 'Order Katya',
-            theme: DefaultTheme().buildCupertinoThemeData(),
-            home: const MainPage(),
+        ? Theme(
+            data: DefaultTheme().buildThemeData(),
+            child: CupertinoApp(
+              navigatorKey: NavigationService.navigatorKey,
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                DefaultMaterialLocalizations.delegate,
+                DefaultWidgetsLocalizations.delegate,
+                DefaultCupertinoLocalizations.delegate,
+              ],
+              title: 'Order Katya',
+              theme: DefaultTheme().buildCupertinoThemeData(),
+              home: const MainPage(),
+            ),
           )
         : MaterialApp(
             title: "Order Katya",

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,30 +11,27 @@ class DefaultTheme {
 
   ThemeData buildThemeData() {
     return ThemeData(
-      primarySwatch: _createMaterialColor(const Color(0x00e94168)),
-      colorScheme: _schemeOfcolors,
-      fontFamily: 'Roboto',
-      textTheme: ThemeData.light().textTheme.copyWith(
-            titleLarge: const TextStyle(
-              fontFamily: 'Roboto',
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-            titleMedium: const TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 14),
-            titleSmall: const TextStyle(
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.bold,
-                fontSize: 12),
-            headlineSmall: const TextStyle(
-              fontFamily: 'Roboto',
-              fontSize: 16,
-            ),
-          ),
-    );
+        primarySwatch: _createMaterialColor(const Color(0x00e94168)),
+        colorScheme: _schemeOfcolors,
+        fontFamily: 'Roboto',
+        textTheme: _textTheme);
   }
+
+  final TextTheme _textTheme = ThemeData.light().textTheme.copyWith(
+        titleLarge: const TextStyle(
+          fontFamily: 'Roboto',
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+        titleMedium: const TextStyle(
+            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 14),
+        titleSmall: const TextStyle(
+            fontFamily: 'Roboto', fontWeight: FontWeight.bold, fontSize: 12),
+        headlineSmall: const TextStyle(
+          fontFamily: 'Roboto',
+          fontSize: 18,
+        ),
+      );
 
   final ColorScheme _schemeOfcolors = ColorScheme.fromSwatch().copyWith(
     primary: const Color.fromRGBO(228, 18, 67, 1),
