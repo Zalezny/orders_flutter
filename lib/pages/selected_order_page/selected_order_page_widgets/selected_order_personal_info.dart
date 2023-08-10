@@ -81,9 +81,22 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
             style: textStyle,
           ),
         if (selectedOrder.discount != null)
-          Text(
-            selectedOrder.discount!.code!,
-            style: textStyle,
+          Container(
+            margin: const EdgeInsets.only(top: 24),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Kod Rabatowy: ',
+                    style: textStyle,
+                  ),
+                  TextSpan(
+                    text: selectedOrder.discount!.code!,
+                    style: textStyle!.copyWith(color: Theme.of(context).colorScheme.primary),
+                  ),
+                ],
+              ),
+            ),
           )
         else if (selectedOrder.comments!.isEmpty)
           Text(
