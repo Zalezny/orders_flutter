@@ -70,6 +70,7 @@ class Orders {
     iV = json['__v'];
     status = json['status'];
     payment = json['payment'] != null ? Payment.fromJson(json['payment']) : null;
+    discount = json['discount'] != null ? Discount.fromJson(json['discount']) : null;
   }
 }
 
