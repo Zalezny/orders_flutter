@@ -16,6 +16,13 @@ class SelectedOrderCart extends StatelessWidget {
     return sum;
   }
 
+  int discountPrice() {
+    if (selectedOrder.discount != null) {
+      return addAllPrices() - selectedOrder.discount!.totalDiscountPrice!;
+    }
+    return addAllPrices();
+  }
+
   @override
   Widget build(BuildContext context) {
     final cart = selectedOrder.order;
@@ -45,6 +52,40 @@ class SelectedOrderCart extends StatelessWidget {
               ],
             ),
           ),
+          if (selectedOrder.discount != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Kwota: ",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  Text(
+                    "${addAllPrices().toString()} zł",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+            ),
+          if (selectedOrder.discount != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Rabat: ",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  Text(
+                    "-${selectedOrder.discount!.totalDiscountPrice} zł",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0, left: 8.0),
             child: Row(
@@ -55,7 +96,7 @@ class SelectedOrderCart extends StatelessWidget {
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 Text(
-                  "${addAllPrices().toString()} zł",
+                  "${discountPrice().toString()} zł",
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ],

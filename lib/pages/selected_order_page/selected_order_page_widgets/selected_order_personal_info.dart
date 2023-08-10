@@ -75,15 +75,21 @@ class SelectedOrderPersonalInfo extends StatelessWidget {
           "Komentarze: ",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        selectedOrder.comments!.isNotEmpty
-            ? Text(
-                selectedOrder.comments!,
-                style: textStyle,
-              )
-            : Text(
-                "brak komentarza",
-                style: textStyle,
-              ),
+        if (selectedOrder.comments!.isNotEmpty)
+          Text(
+            selectedOrder.comments!,
+            style: textStyle,
+          ),
+        if (selectedOrder.discount != null)
+          Text(
+            selectedOrder.discount!.code!,
+            style: textStyle,
+          )
+        else if (selectedOrder.comments!.isEmpty)
+          Text(
+            "brak komentarza",
+            style: textStyle,
+          ),
       ],
     );
   }

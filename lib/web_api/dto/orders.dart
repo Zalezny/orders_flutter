@@ -1,5 +1,6 @@
 import 'package:orderskatya/web_api/dto/payment.dart';
 
+import 'discount.dart';
 import 'order.dart';
 import 'shipment.dart';
 
@@ -22,6 +23,7 @@ class Orders {
   int? iV;
   bool? status;
   Payment? payment;
+  Discount? discount;
 
   Orders(
       {this.sId,
