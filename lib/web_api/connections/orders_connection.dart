@@ -13,7 +13,7 @@ class OrdersConnection {
 
   Future<OrderListDto> getOrders() async {
     print(ConstDatabase.ordersUrl);
-    final Response response = await apiService.get(ConstDatabase.apiUrl, ConstDatabase.ordersUrl);
+    final Response response = await apiService.get(ConstDatabase.ordersUrl);
 
     if (response.statusCode == 404) {
       throw Exception('Failed load');
@@ -27,7 +27,7 @@ class OrdersConnection {
 
   Future<Orders> getOrderById(String id) async {
     final String clearId = id.replaceAll(RegExp(r'"'), '');
-    final Response response = await apiService.get(ConstDatabase.apiUrl, ConstDatabase.dynamicOrderUrl(clearId));
+    final Response response = await apiService.get(ConstDatabase.dynamicOrderUrl(clearId));
 
     if (response.statusCode == 404) {
       throw Exception('Failed load');
@@ -38,7 +38,10 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchIsArchive({required bool isArchive, required String id, required VoidCallback onSuccess}) async {
+  Future<void> patchIsArchive(
+      {required bool isArchive,
+      required String id,
+      required VoidCallback onSuccess}) async {
     final Map<String, String> body = {
       'archive': isArchive.toString(),
     };
@@ -52,7 +55,11 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchStatus({required bool status, required String id, required VoidCallback onSuccess}) async {
+  Future<void> patchStatus(
+      {required bool status,
+      required String id,
+      required VoidCallback onSuccess}) async {
+
     final Map<String, String> body = {
       'status': status.toString(),
     };
@@ -66,7 +73,10 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchNew({required bool isNew, required String id, required VoidCallback onSuccess}) async {
+  Future<void> patchNew(
+      {required bool isNew,
+      required String id,
+      required VoidCallback onSuccess}) async {
     final Map<String, String> body = {
       'newOrder': isNew.toString(),
     };
