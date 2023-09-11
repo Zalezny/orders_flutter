@@ -19,7 +19,6 @@ class OrdersConnection {
       throw Exception('Failed load');
     } else {
       final body = json.decode(response.body);
-      print(body);
       var orders = OrderListDto.fromJson(body);
       return orders;
     }
