@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +10,7 @@ class MainCustomTabView extends StatefulWidget {
   final Future<void> Function() pullRefresh;
   final int index;
 
-  const MainCustomTabView(
-      {super.key,
-      required this.reversedOrdersList,
-      required this.pullRefresh,
-      this.index = 0});
+  const MainCustomTabView({super.key, required this.reversedOrdersList, required this.pullRefresh, this.index = 0});
 
   @override
   State<MainCustomTabView> createState() => _MainCustomTabViewState();
@@ -26,13 +22,11 @@ class _MainCustomTabViewState extends State<MainCustomTabView> {
     final listOfTabs = [
       RefreshIndicator(
         onRefresh: widget.pullRefresh,
-        child: OrdersPage(
-            reversedOrdersList: widget.reversedOrdersList, isSend: false),
+        child: OrdersPage(reversedOrdersList: widget.reversedOrdersList, isSend: false),
       ),
       RefreshIndicator(
         onRefresh: widget.pullRefresh,
-        child: OrdersPage(
-            reversedOrdersList: widget.reversedOrdersList, isSend: true),
+        child: OrdersPage(reversedOrdersList: widget.reversedOrdersList, isSend: true),
       ),
     ];
 
@@ -43,6 +37,5 @@ class _MainCustomTabViewState extends State<MainCustomTabView> {
             },
           )
         : TabBarView(children: listOfTabs);
-    
   }
 }

@@ -7,10 +7,10 @@ class ApiService {
     'authorization': ConstDatabase.keyAuth,
   };
 
-  Future<http.Response> get(String uri) async {
+  Future<http.Response> get(String authority, String path ) async {
     
     return http.get(
-      Uri.parse(uri),
+      Uri.https(authority, path),
       headers: headers,
     );
   }
@@ -20,7 +20,7 @@ class ApiService {
       String uri, Map<String, String> toPatchData) async {
         headers['Content-Type'] = 'application/json';
     return http.patch(
-      Uri.parse(uri),
+      Uri.https(uri),
       headers: headers,
       body: json.encode(toPatchData),
     );

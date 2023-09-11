@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
@@ -47,8 +47,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                     isArchive: !(simpleOrder.archive!),
                     id: orderId,
                     onSuccess: () {
-                      widget.swipeArchive(
-                          simpleOrder.sId, !(simpleOrder.archive!));
+                      widget.swipeArchive(simpleOrder.sId, !(simpleOrder.archive!));
                       Navigator.of(context).pop(); // its confusing
                     });
               },
@@ -76,9 +75,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
                 onChanged: (newValue) => ordersConnection.patchStatus(
                     status: newValue!,
                     id: simpleOrder.sId!,
-                    onSuccess: () => Fluttertoast.showToast(
-                        msg:
-                            "Pomyślnie zaktualizowano stan zapłaty na $newValue")),
+                    onSuccess: () => Fluttertoast.showToast(msg: "Pomyślnie zaktualizowano stan zapłaty na $newValue")),
               ),
               simpleOrder.payment != null
                   ? Container(
@@ -108,8 +105,7 @@ class _SelectedOrderPageState extends State<SelectedOrderPage> {
         : Scaffold(
             appBar: appBar,
             body: pageBody,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
             floatingActionButton: SelectedOrderFloatingActionButton(
               isArchive: simpleOrder.archive!,
               orderId: orderId,

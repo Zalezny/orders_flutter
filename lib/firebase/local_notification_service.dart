@@ -6,12 +6,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/web_api/connections/orders_connection.dart';
+import 'package:universal_io/io.dart';
 
 class LocalNotificationsService {
   static final FlutterLocalNotificationsPlugin notificationPlugin =
       FlutterLocalNotificationsPlugin();
 
   static void initialize() {
+    if(!Platform.isAndroid || !Platform.isIOS) return;
+    
     InitializationSettings initializationSettings = InitializationSettings(
         android: const AndroidInitializationSettings(
           'ic_logo',
@@ -40,6 +43,8 @@ class LocalNotificationsService {
   }
 
   static void showNotification(RemoteMessage message) {
+    if(!Platform.isAndroid || !Platform.isIOS) return;
+
     const NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails('net.katya.notification', '100',
             importance: Importance.max,

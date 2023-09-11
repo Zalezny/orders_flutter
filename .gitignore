@@ -53,3 +53,5 @@ ios/firebase_app_id_file.json
 lib/firebase_options.dart
 macos/Runner/GoogleService-Info.plist
 macos/firebase_app_id_file.json
+
+web/firebase.config.js

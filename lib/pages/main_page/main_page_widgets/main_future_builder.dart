@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -39,9 +39,7 @@ class _MainFutureBuilderState extends State<MainFutureBuilder> {
             future: _futureOrder,
             builder: (ctx, snapshot) {
               if (snapshot.hasData) {
-                return MainCupertinoTabBar(
-                    pullRefresh: _pullRefresh,
-                    ordersList: snapshot.data!.orders!);
+                return MainCupertinoTabBar(pullRefresh: _pullRefresh, ordersList: snapshot.data!.orders!);
               } else if (snapshot.hasError) {
                 throw Exception(snapshot.error);
               }
@@ -55,9 +53,7 @@ class _MainFutureBuilderState extends State<MainFutureBuilder> {
             builder: (ctx, snapshot) {
               if (snapshot.hasData) {
                 var ordersList = snapshot.data!.orders;
-                return MainCustomTabView(
-                    reversedOrdersList: ordersList!.reversed.toList(),
-                    pullRefresh: _pullRefresh);
+                return MainCustomTabView(reversedOrdersList: ordersList!.reversed.toList(), pullRefresh: _pullRefresh);
               } else if (snapshot.hasError) {
                 throw Exception(snapshot.error);
               }

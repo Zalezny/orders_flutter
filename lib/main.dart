@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,22 +9,20 @@ import 'package:orderskatya/services/navigation_service.dart';
 import 'package:orderskatya/themes/default_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:universal_io/io.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   String newOrderId = "";
   WidgetsFlutterBinding.ensureInitialized();
+  setupDependencyInjection();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  setupDependencyInjection();
-
   FirebaseMessagingService.initalization();
 
-  final RemoteMessage? terminatedMessage =
-      await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
+  final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
 
   if (terminatedMessage != null) {
     if (terminatedMessage.data.isNotEmpty) {
@@ -49,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    FirebaseMessagingService.requestNotificationPermission();
+    if (Platform.isAndroid || Platform.isIOS) FirebaseMessagingService.requestNotificationPermission();
     // Provider.of<TerminatedMessageProvider>(context).setOrderId(widget.starterId);
   }
 
