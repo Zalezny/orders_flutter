@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart';
 import 'package:orderskatya/web_api/const_database.dart';
 import 'package:orderskatya/web_api/dto/order_list_dto.dart';
 import 'package:orderskatya/web_api/dto/orders.dart';
@@ -18,8 +18,7 @@ class OrdersConnection {
     if (response.statusCode == 404) {
       throw Exception('Failed load');
     } else {
-      final body = json.decode(response.body);
-      var orders = OrderListDto.fromJson(body);
+      var orders = OrderListDto.fromJson(response.data);
       return orders;
     }
   }
@@ -31,16 +30,11 @@ class OrdersConnection {
     if (response.statusCode == 404) {
       throw Exception('Failed load');
     } else {
-      final body = json.decode(response.body);
-
-      return Orders.fromJson(body);
+      return Orders.fromJson(response.data);
     }
   }
 
-  Future<void> patchIsArchive(
-      {required bool isArchive,
-      required String id,
-      required VoidCallback onSuccess}) async {
+  Future<void> patchIsArchive({required bool isArchive, required String id, required VoidCallback onSuccess}) async {
     final Map<String, String> body = {
       'archive': isArchive.toString(),
     };
@@ -54,11 +48,7 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchStatus(
-      {required bool status,
-      required String id,
-      required VoidCallback onSuccess}) async {
-
+  Future<void> patchStatus({required bool status, required String id, required VoidCallback onSuccess}) async {
     final Map<String, String> body = {
       'status': status.toString(),
     };
@@ -72,10 +62,7 @@ class OrdersConnection {
     }
   }
 
-  Future<void> patchNew(
-      {required bool isNew,
-      required String id,
-      required VoidCallback onSuccess}) async {
+  Future<void> patchNew({required bool isNew, required String id, required VoidCallback onSuccess}) async {
     final Map<String, String> body = {
       'newOrder': isNew.toString(),
     };

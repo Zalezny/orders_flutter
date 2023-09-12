@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 import 'package:orderskatya/web_api/const_database.dart';
 
 class ApiService {
@@ -7,22 +7,20 @@ class ApiService {
     'authorization': ConstDatabase.keyAuth,
   };
 
-  Future<http.Response> get(String uri) async {
-    
-    return http.get(
-      Uri.parse(uri),
-      headers: headers,
-    );
+  Future<Response> get(String uri) async {
+    final dio = Dio();
+    dio.options.headers.addAll(headers);
+
+    return dio.get(uri);
   }
 
-  Future<http.Response> patch(
-    
-      String uri, Map<String, String> toPatchData) async {
-        headers['Content-Type'] = 'application/json';
-    return http.patch(
-      Uri.parse(uri),
-      headers: headers,
-      body: json.encode(toPatchData),
+  Future<Response> patch(String uri, Map<String, String> toPatchData) async {
+    final dio = Dio();
+
+    dio.options.headers['Content-Type'] = 'application/json';
+    return dio.patch(
+      uri,
+      data: json.encode(toPatchData),
     );
   }
 }

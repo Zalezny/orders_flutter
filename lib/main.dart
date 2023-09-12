@@ -20,9 +20,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  if(Platform.isAndroid || Platform.isIOS) {
   FirebaseMessagingService.initalization();
 
-  final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
+    final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
 
   if (terminatedMessage != null) {
     if (terminatedMessage.data.isNotEmpty) {
@@ -30,6 +31,8 @@ Future<void> main() async {
     }
   }
   FirebaseMessagingService.terminatedId = newOrderId;
+  }
+  
 
   runApp(MyApp(starterId: newOrderId));
 }
