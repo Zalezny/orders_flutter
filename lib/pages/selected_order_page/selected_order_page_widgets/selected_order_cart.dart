@@ -7,8 +7,8 @@ class SelectedOrderCart extends StatelessWidget {
 
   const SelectedOrderCart({super.key, required this.selectedOrder});
 
-  int addAllPrices() {
-    int sum = 0;
+  double addAllPrices() {
+    double sum = 0;
     for (int i = 0; i < selectedOrder.order.length; i++) {
       sum += selectedOrder.order[i].price! * selectedOrder.order[i].quantity!;
     }
@@ -16,7 +16,7 @@ class SelectedOrderCart extends StatelessWidget {
     return sum;
   }
 
-  int discountPrice() {
+  double discountPrice() {
     if (selectedOrder.discount != null) {
       return addAllPrices() - selectedOrder.discount!.totalDiscountPrice!;
     }

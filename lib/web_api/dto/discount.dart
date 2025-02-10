@@ -1,6 +1,6 @@
 class Discount {
   String? code;
-  int? totalDiscountPrice;
+  num? totalDiscountPrice;
 
   Discount({this.code, this.totalDiscountPrice});
 

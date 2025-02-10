@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
@@ -12,7 +10,6 @@ class OrdersConnection {
   final apiService = GetIt.I<ApiService>();
 
   Future<OrderListDto> getOrders() async {
-    print(ConstDatabase.ordersUrl);
     final Response response = await apiService.get(ConstDatabase.ordersUrl);
 
     if (response.statusCode == 404) {

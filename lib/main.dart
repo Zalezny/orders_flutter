@@ -1,4 +1,3 @@
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +19,18 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  if(Platform.isAndroid || Platform.isIOS) {
-  FirebaseMessagingService.initalization();
+  if (Platform.isAndroid || Platform.isIOS) {
+    FirebaseMessagingService.initalization();
 
     final RemoteMessage? terminatedMessage = await FirebaseMessagingService.firebaseMessaging!.getInitialMessage();
 
-  if (terminatedMessage != null) {
-    if (terminatedMessage.data.isNotEmpty) {
-      newOrderId = terminatedMessage.data['body'];
+    if (terminatedMessage != null) {
+      if (terminatedMessage.data.isNotEmpty) {
+        newOrderId = terminatedMessage.data['body'];
+      }
     }
+    FirebaseMessagingService.terminatedId = newOrderId;
   }
-  FirebaseMessagingService.terminatedId = newOrderId;
-  }
-  
 
   runApp(MyApp(starterId: newOrderId));
 }

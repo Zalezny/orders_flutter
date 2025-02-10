@@ -55,3 +55,4 @@ macos/Runner/GoogleService-Info.plist
 macos/firebase_app_id_file.json
 
 web/firebase.config.js
+/firebase.json
