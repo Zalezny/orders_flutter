@@ -27,6 +27,7 @@ class _MainFutureBuilderState extends State<MainFutureBuilder> {
   }
 
   Future<void> _pullRefresh() async {
+    await Future.delayed(const Duration(seconds: 1));
     setState(() {
       _futureOrder = ordersConnection.getOrders();
     });
@@ -36,6 +37,7 @@ class _MainFutureBuilderState extends State<MainFutureBuilder> {
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? FutureBuilder(
+            key: ValueKey(_futureOrder),
             future: _futureOrder,
             builder: (ctx, snapshot) {
               if (snapshot.hasData) {

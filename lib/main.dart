@@ -9,16 +9,14 @@ import 'package:orderskatya/themes/default_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:universal_io/io.dart';
-import 'firebase_options.dart';
 
 Future<void> main() async {
   String newOrderId = "";
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   setupDependencyInjection();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   if (Platform.isAndroid || Platform.isIOS) {
     FirebaseMessagingService.initalization();
 
